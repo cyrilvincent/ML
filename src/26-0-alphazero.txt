@@ -1,0 +1,5 @@
+Aller dans le répertoire alphazero
+Ouvrir avec Netron chess_model_best_weight.h5
+Lire rapidement ArXiv-AlphaZero-1712.01815.pdf
+
+
