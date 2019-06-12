@@ -1,4 +1,5 @@
 *
+!*.py
 !*.pptx
 !*.docx
-!*.py
+!*.pdf
