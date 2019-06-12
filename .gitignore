@@ -3,3 +3,9 @@
 !*.pptx
 !*.docx
 !*.pdf
+!*.txt
+!**/breastcancer/**
+!**/house/**
+!**/img/**
+!**/mesures/**
+!**/tp/**
