@@ -8,6 +8,9 @@ house_data = pd.read_csv('house/house.csv')
 
 surface_max = 300
 standard_dev = 2199
+
+f = lambda x : 41 * x - 283
+
 print(house_data)
 
 # Filtrer le nuage de point par surface_max et 3 * standard_dev
