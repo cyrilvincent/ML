@@ -3,14 +3,6 @@ tf.enable_eager_execution()
 
 # Dataset
 # 4 Tensors de dimension 0 (valeur unique)
-dataset = tf.data.Dataset.from_tensor(tf.random_uniform([4]))
-print(dataset.output_types)  # ==> "tf.float32"
-print(dataset.output_shapes)  # ==> "()"
-for el in dataset:
-    print(el)
-
-# Dataset
-# 4 Tensors de dimension 0 (valeur unique)
 dataset0 = tf.data.Dataset.from_tensor_slices(tf.random_uniform([4]))
 print(dataset0.output_types)  # ==> "tf.float32"
 print(dataset0.output_shapes)  # ==> "()"

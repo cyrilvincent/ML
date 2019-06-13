@@ -11,6 +11,7 @@ print(result)
 
 v1 = tf.constant([1,2])
 v2 = tf.constant([3,4])
+print(v1.shape)
 v3 = v1 * v2
 sess = tf.Session()
 result = sess.run(v3)
