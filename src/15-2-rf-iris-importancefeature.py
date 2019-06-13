@@ -15,7 +15,7 @@ xtrain, xtest, ytrain, ytest = ms.train_test_split(data, target, train_size=0.8,
 import sklearn.ensemble as rf
 model = rf.RandomForestClassifier(n_estimators=100)
 model.fit(xtrain, ytrain)
-error = 1 - model.score(xtest, ytest)
+error = model.score(xtest, ytest)
 print('Erreur: %f' % error)
 
 # On récupère les prédictions sur les données test

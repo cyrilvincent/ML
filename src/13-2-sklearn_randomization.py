@@ -15,7 +15,7 @@ import sklearn.linear_model as sklm
 regr = sklm.LinearRegression()
 regr.fit(xtrain,ytrain)
 import math
-print(regr.score(xtrain,ytrain))
+print(regr.score(xtest,ytest))
 print(regr.coef_)
 print(regr.intercept_)
 
