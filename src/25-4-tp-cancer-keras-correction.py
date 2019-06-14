@@ -27,16 +27,13 @@ model = keras.Sequential([
   ])
 
 #model.compile(loss="mse", optimizer="sgd")
-sgd = keras.optimizers.SGD(nesterov=True, lr=1e-4)
+sgd = keras.optimizers.SGD(nesterov=True, lr=1e-5)
 model.compile(loss="mse", optimizer=sgd)
 model.summary()
 
-print(X_train.shape)
 history = model.fit(X_train, y_train, epochs=2000)
 
 print(history)
 
-print(X_test.shape)
-print(y_test.shape)
 eval = model.evaluate(X_test, y_test)
 print(eval)

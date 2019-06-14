@@ -46,7 +46,7 @@ print(mae)
 
 model_json = model.to_json()
 print(model_json)
-model.save('tensorflow_examples/24-keras.h5')
-model.save('tensorflow_examples/24-keras.tf')
+model.save('24-keras.h5')
+#model.save('24-keras.tf')
 
 #Netron

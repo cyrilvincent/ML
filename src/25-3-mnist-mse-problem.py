@@ -23,8 +23,8 @@ model = keras.Sequential([
   ])
 
 model.compile(loss='mse',optimizer='adam', metrics=['accuracy'])
-trained = model.fit(X_train, Y_train, epochs=10, batch_size=120, validation_data=(X_test, Y_test))
-print(model.summary())
+trained = model.fit(X_train, Y_train, epochs=2, batch_size=120, validation_data=(X_test, Y_test))
 
+print(model.summary())
 # Mauvais résultat à cause de mse
 

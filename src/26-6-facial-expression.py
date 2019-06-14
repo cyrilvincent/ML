@@ -177,7 +177,7 @@ if monitor_testset_results == True:
 # ------------------------------
 # make prediction for custom image out of test set
 
-img = image.load_img("facenet/cyril.jpg", grayscale=True, target_size=(48, 48))
+img = image.load_img("facenet/monalisa.png", grayscale=True, target_size=(48, 48))
 
 x = image.img_to_array(img)
 x = np.expand_dims(x, axis=0)
