@@ -1,6 +1,3 @@
-from sklearn.datasets import load_breast_cancer
-cancer = load_breast_cancer() # more info : https://goo.gl/U2Uwz2
-
 import numpy as np
 X=np.array([[0,0],[0,1],[1,0],[1,1]],dtype=float)
 y=np.array([0,1,1,0],dtype=float)

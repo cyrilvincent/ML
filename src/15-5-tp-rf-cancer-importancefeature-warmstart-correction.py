@@ -23,6 +23,7 @@ print(predicted)
 print(y_test)
 print(predicted - y_test)
 
+print(cancer.feature_names)
 features_importances = model.feature_importances_
 print(features_importances)
 
@@ -31,17 +32,25 @@ plt.bar(range(len(features_importances)),features_importances)
 plt.show()
 
 import pickle
-with open("breastcancer/cancer-rf.pickle","wb") as f:
+with open("cancer-rf.pickle","wb") as f:
     pickle.dump(model, f)
 
 model = None
 
-with open("breastcancer/cancer-rf.pickle","rb") as f:
+with open("cancer-rf.pickle","rb") as f:
     model = pickle.load(f)
 
 model.n_estimators *= 2
 model_reinforced = model.fit(X_train, y_train)
 
+estimator = model.estimators_[0]
 
+from sklearn.tree import export_graphviz
+# Export as dot file
+export_graphviz(estimator, out_file='tree.dot',
+                feature_names = cancer.feature_names,
+                class_names = cancer.target_names,
+                rounded = True, proportion = False,
+                precision = 2, filled = True)
 
 
