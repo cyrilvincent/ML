@@ -1,8 +1,5 @@
 import tensorflow as tf
 import tensorflow.keras as keras
-#import keras
-
-from keras import backend as K
 
 from sklearn.datasets import load_breast_cancer
 cancer = load_breast_cancer() # more info : https://goo.gl/U2Uwz2
@@ -13,6 +10,7 @@ X_train,X_test,y_train,y_test = train_test_split(X,y)
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 scaler.fit(X_train)
+
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 

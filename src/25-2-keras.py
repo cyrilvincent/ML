@@ -58,6 +58,6 @@ plot_history(history)
 
 # Predict
 # Normalement sur test_data normalisées
-[loss, mae] = model.evaluate(train_data, train_labels, verbose=0)
+[loss, mae] = model.evaluate(train_data, train_labels)
 
 print(mae)

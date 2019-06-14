@@ -14,8 +14,8 @@ feature_columns = [tf.feature_column.numeric_column("x", shape=[28, 28])]
 # Build 2 layer DNN classifier
 classifier = tf.estimator.DNNClassifier(
     feature_columns=feature_columns,
-    hidden_units=[256, 32],
-    optimizer=tf.train.AdamOptimizer(1e-4),
+    hidden_units=[500, 500, 500],
+    optimizer=tf.train.AdamOptimizer(1e-5),
     n_classes=10,
 )
 
@@ -36,8 +36,8 @@ test_input_fn = tf.estimator.inputs.numpy_input_fn(
     shuffle=False
 )
 
-train_spec = tf.estimator.TrainSpec(input_fn=train_input_fn, max_steps=100)
-eval_spec = tf.estimator.EvalSpec(input_fn=train_input_fn, steps=100)
+train_spec = tf.estimator.TrainSpec(input_fn=train_input_fn, max_steps=1000)
+eval_spec = tf.estimator.EvalSpec(input_fn=train_input_fn, steps=1000)
 eval = tf.estimator.train_and_evaluate(classifier, train_spec, eval_spec)
 print(classifier.evaluate(input_fn=test_input_fn))
 

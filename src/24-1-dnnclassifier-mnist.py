@@ -15,7 +15,7 @@ feature_columns = [tf.feature_column.numeric_column("x", shape=[28, 28])]
 classifier = tf.estimator.DNNClassifier(
     feature_columns=feature_columns,
     hidden_units=[256, 32],
-    optimizer=tf.train.AdamOptimizer(1e-4),
+    optimizer=tf.train.AdamOptimizer(1e-5),
     n_classes=10,
 )
 
