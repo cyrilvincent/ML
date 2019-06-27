@@ -8,8 +8,8 @@ cancer = load_breast_cancer() # more info : https://goo.gl/U2Uwz2
 X=cancer['data']
 y=cancer['target']
 
-
 print(cancer.feature_names)
 print(X.shape) #569 * 30
 print(y.shape) #569
+print(y)
 

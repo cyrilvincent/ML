@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 house_data = pd.read_csv('house/house.csv')
 
 print(house_data)
-print(house_data["loyer"].iloc[1])
 
 # On affiche le nuage de points dont on dispose
 plt.plot(house_data['surface'], house_data['loyer'], 'ro', markersize=4)
