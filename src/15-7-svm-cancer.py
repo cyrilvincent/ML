@@ -11,14 +11,12 @@ print(y.shape) #569
 from sklearn.model_selection import train_test_split
 X_train,X_test,y_train,y_test = train_test_split(X,y)
 
-import sklearn.neighbors as nn
-k = 30
-model = nn.KNeighborsClassifier(k)
+import sklearn.svm as svm
+model = svm.SVC(C=0.1, kernel= "poly")
 model.fit(X_train, y_train)
-score = model.score(X_test, y_test) #93%
+
+score = model.score(X_test, y_test)
 print(score)
 
-predicted = model.predict(X_test)
-print(predicted)
-print(y_test)
-print(predicted - y_test)
+
+

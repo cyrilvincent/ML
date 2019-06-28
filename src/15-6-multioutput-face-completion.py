@@ -19,10 +19,10 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import fetch_olivetti_faces
 from sklearn.utils.validation import check_random_state
 
-from sklearn.ensemble import ExtraTreesRegressor
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import RidgeCV
+from sklearn.neural_network import MLPRegressor
 
 # Load the faces datasets
 data = fetch_olivetti_faces(data_home='./mnist/')
@@ -48,15 +48,15 @@ y_test = test[:, n_pixels // 2:]
 
 # Fit estimators
 ESTIMATORS = {
-    "Extra trees": ExtraTreesRegressor(n_estimators=10, max_features=32,
-                                       random_state=0),
+    "Random Forest": RandomForestRegressor(n_estimators=10, max_features=32),
     "K-nn": KNeighborsRegressor(),
     "Linear regression": LinearRegression(),
-    "Ridge": RidgeCV(),
+    "MLP": MLPRegressor(hidden_layer_sizes=(1000,1000,1000,1000,1000)),
 }
 
 y_test_predict = dict()
 for name, estimator in ESTIMATORS.items():
+    print(f"Fit {name}")
     estimator.fit(X_train, y_train)
     y_test_predict[name] = estimator.predict(X_test)
 

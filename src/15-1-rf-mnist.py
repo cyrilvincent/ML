@@ -2,7 +2,7 @@ import sklearn.datasets as ds
 mnist = ds.fetch_mldata('MNIST original',data_home='./mnist/')
 
 import numpy as np
-sample = np.random.randint(70000, size=70000)
+sample = np.random.randint(70000, size=5000)
 data = mnist.data[sample]
 target = mnist.target[sample]
 print(len(data))
@@ -11,10 +11,10 @@ import sklearn.model_selection as ms
 xtrain, xtest, ytrain, ytest = ms.train_test_split(data, target, train_size=0.8, test_size=0.2)
 
 import sklearn.ensemble as rf
-model = rf.RandomForestClassifier(n_estimators=100)
+model = rf.RandomForestClassifier(n_estimators=1000)
 model.fit(xtrain, ytrain)
-error = model.score(xtest, ytest)
-print('Erreur: %f' % error)
+score = model.score(xtest, ytest)
+print('Score: %f' % score)
 
 # On récupère les prédictions sur les données test
 predicted = model.predict(xtest)

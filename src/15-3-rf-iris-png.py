@@ -21,9 +21,9 @@ print('Erreur: %f' % model.score(xtest, ytest))
 
 estimator = model.estimators_[0]
 
-from sklearn.tree import export_graphviz
+import sklearn.tree
 # Export as dot file
-export_graphviz(estimator, out_file='tree.dot',
+sklearn.tree.export_graphviz(estimator, out_file='tree.dot',
                 feature_names = iris.feature_names,
                 class_names = iris.target_names,
                 rounded = True, proportion = False,

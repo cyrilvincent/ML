@@ -2,7 +2,7 @@ import sklearn.datasets as ds
 mnist = ds.fetch_mldata('MNIST original',data_home='./mnist/')
 
 import numpy as np
-sample = np.random.randint(70000, size=5000)
+sample = np.random.randint(70000, size=70000)
 data = mnist.data[sample]
 target = mnist.target[sample]
 print(len(data))

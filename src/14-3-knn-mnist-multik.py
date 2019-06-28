@@ -17,12 +17,12 @@ score = model.score(xtest, ytest)
 print('Score: %f' % score)
 
 scores = []
-for k in range(2,15):
+for k in range(2,10):
     print(f"k:{k}")
     model = nn.KNeighborsClassifier(k)
     scores.append(model.fit(xtrain, ytrain).score(xtest, ytest))
 import matplotlib.pyplot as plt
-plt.plot(range(2,15), scores, 'o-')
+plt.plot(range(2,10), scores, 'o-')
 plt.show()
 
 min_nn = scores.index(max(scores)) + 2
