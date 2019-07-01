@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 # cpu - gpu configuration
 config = tf.ConfigProto(device_count={'GPU': 0, 'CPU': 56})  # max: 1 gpu, 56 cpu
 sess = tf.Session(config=config)
-keras.backend.set_session(sess)
+#keras.backend.set_session(sess)
 # ------------------------------
 # variables
 num_classes = 7  # angry, disgust, fear, happy, sad, surprise, neutral
@@ -105,8 +105,7 @@ model.add(Dropout(0.2))
 model.add(Dense(num_classes, activation='softmax'))
 # ------------------------------
 # batch process
-gen = ImageDataGenerator()
-train_generator = gen.flow(x_train, y_train, batch_size=batch_size)
+
 
 # ------------------------------
 
@@ -120,6 +119,8 @@ model.compile(loss='categorical_crossentropy'
 fit = False
 
 if fit == True:
+    gen = ImageDataGenerator()
+    train_generator = gen.flow(x_train, y_train, batch_size=batch_size)
     model.fit_generator(train_generator, steps_per_epoch=batch_size, epochs=epochs)  # train for randomly selected one
 else:
     model.load_weights('facenet/facial_expression_model_weights.h5')  # load weights

@@ -9,12 +9,11 @@ from sklearn.model_selection import train_test_split
 X_train,X_test,y_train,y_test = train_test_split(X,y)
 
 from sklearn.neural_network import MLPClassifier
-mlp = MLPClassifier(hidden_layer_sizes=(30,30,30), activation="tanh")
+mlp = MLPClassifier(hidden_layer_sizes=(50,50,50,50,50), batch_size=1000, early_stopping=True, max_iter=10000, alpha=1e-5, activation="relu")
 mlp.fit(X_train,y_train)
 
 predictions = mlp.predict(X_test)
 
 #print(predictions)
-print(mlp.score(X_test, y_test))
-
 print(mlp.coefs_)
+print(mlp.score(X_test, y_test))

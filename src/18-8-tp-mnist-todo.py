@@ -1,5 +1,5 @@
 from sklearn.datasets import fetch_mldata
-mnist = fetch_mldata("MNIST original")
+mnist = fetch_mldata("MNIST original",data_home='./mnist/')
 
 # Scaler maison
 X = mnist.data / 255. # Transforme les 256 niveau de gris en [0.0,1.0]
