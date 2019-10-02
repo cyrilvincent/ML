@@ -1,6 +1,7 @@
 from sklearn.datasets import fetch_mldata
-import tensorflow as tf
+#import tensorflow as tf
 import tensorflow.keras as keras
+import tensorflow.compat.v1 as tf
 
 mnist = fetch_mldata("MNIST original")
 # rescale the data, use the traditional train/test split

@@ -1,5 +1,6 @@
-import tensorflow as tf
+#import tensorflow as tf
 import tensorflow.keras as keras
+import tensorflow.compat.v1 as tf
 
 from sklearn.datasets import load_breast_cancer
 cancer = load_breast_cancer() # more info : https://goo.gl/U2Uwz2

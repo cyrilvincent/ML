@@ -1,6 +1,8 @@
-import tensorflow as tf
+#import tensorflow as tf
 import tensorflow.keras as keras
 import pandas as pd
+import tensorflow.compat.v1 as tf
+
 
 print(tf.VERSION)
 print(keras.__version__)

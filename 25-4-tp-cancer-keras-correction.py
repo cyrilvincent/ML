@@ -14,8 +14,10 @@ print(X_test)
 
 #from sklearn.neural_network import MLPClassifier
 #mlp = MLPClassifier(hidden_layer_sizes=(30,30,30))
-import tensorflow as tf
+#import tensorflow as tf
 import tensorflow.keras as keras
+import tensorflow.compat.v1 as tf
+
 model = keras.Sequential([
     keras.layers.Dense(30, activation=tf.nn.relu,
                        input_shape=(X_train.shape[1],)),
