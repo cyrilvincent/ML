@@ -31,8 +31,9 @@ with open("house/house.csv") as f:
     surfaces=[]
     loyers=[]
     for row in reader:
-        surfaces.append(int(row["surface"]))
-        loyers.append((int(row["loyer"])))
+        if int(row["surface"]) < 300:
+            surfaces.append(int(row["surface"]))
+            loyers.append((int(row["loyer"])))
 
 print(np.mean(loyers))
 print(np.std(loyers))
