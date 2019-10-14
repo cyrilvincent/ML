@@ -30,8 +30,7 @@ plt.show()
 
 print(regr.score(xtrain,ytrain))
 
-import sklearn.metrics as m
-print(math.sqrt(m.mean_squared_error(regr.predict(xtest), ytest)))
+print(regr.predict(xtest), ytest)
 
 
 
