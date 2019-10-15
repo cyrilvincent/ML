@@ -6,7 +6,7 @@ print(mnist.target.shape) #70000 targets (labels)
 
 import numpy as np
 # sampling
-l = np.arange(10) * 2 # 0,2,3,6,....,20
+l = np.arange(10) * 2 # 0,2,4,6,....,18
 s = np.array([0,1,5,8])
 print(l[s]) # 0,2,10,16
 

@@ -28,8 +28,6 @@ plt.plot(xtest, ytest, 'ro', markersize=4)
 plt.plot(xtest, regr.predict(xtest) )
 plt.show()
 
-print(regr.score(xtrain,ytrain))
-
 print(regr.predict(xtest), ytest)
 
 

@@ -51,4 +51,7 @@ print(list(filter(isPrime, range(1000))))
 def inc(x):
     return x + 1
 
+inc = lambda x : x + 1
+
 print(list(map(inc, l)))
+
