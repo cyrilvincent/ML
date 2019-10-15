@@ -32,9 +32,8 @@ model = None
 
 # TODO pickle load
 
-model.n_estimators *= 2
-
 # TODO fit again
+model.n_estimators *= 2
 
 # TODO Show graphviz
 

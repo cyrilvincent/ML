@@ -11,7 +11,7 @@ import sklearn.model_selection as ms
 xtrain, xtest, ytrain, ytest = ms.train_test_split(data, target, train_size=0.8, test_size=0.2)
 
 import sklearn.ensemble as rf
-model = rf.RandomForestClassifier(n_estimators=1000)
+model = rf.RandomForestClassifier(n_estimators=100)
 model.fit(xtrain, ytrain)
 score = model.score(xtest, ytest)
 print('Score: %f' % score)
