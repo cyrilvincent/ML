@@ -1,4 +1,5 @@
 from sklearn.datasets import load_breast_cancer
+import tensorflow.compat.v1 as tf
 cancer = load_breast_cancer() # more info : https://goo.gl/U2Uwz2
 X=cancer['data']
 y=cancer['target']
