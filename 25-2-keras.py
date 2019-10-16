@@ -35,11 +35,11 @@ model = keras.Sequential([
 
 model.compile(loss='mse',
                 optimizer=tf.train.RMSPropOptimizer(0.001),
-                metrics=['mae'])
+                metrics=['accuracy'])
 
 model.summary()
 
-history = model.fit(train_data, train_labels, epochs=500,
+history = model.fit(train_data, train_labels, epochs=50,
                     validation_split=0.2)
 
 import matplotlib.pyplot as plt
@@ -48,11 +48,9 @@ import numpy as np
 def plot_history(history):
   plt.figure()
   plt.xlabel('Epoch')
-  plt.ylabel('Mean Abs Error')
-  plt.plot(history.epoch, np.array(history.history['mean_absolute_error']),
-           label='Train Loss')
-  plt.plot(history.epoch, np.array(history.history['val_mean_absolute_error']),
-           label = 'Val loss')
+  plt.ylabel('Accuracy')
+  plt.plot(history.epoch, np.array(history.history['accuracy']),
+           label='Accuracy')
   plt.legend()
   plt.show()
 
@@ -60,6 +58,6 @@ plot_history(history)
 
 # Predict
 # Normalement sur test_data normalisées
-[loss, mae] = model.evaluate(train_data, train_labels)
+[loss, accuracy] = model.evaluate(train_data, train_labels)
 
-print(mae)
+print(accuracy)
