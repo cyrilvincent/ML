@@ -16,8 +16,6 @@ import tensorflow as tf
 import tensorflow.keras.backend as K
 from tensorflow.python.framework import ops
 from tensorflow.python.ops import math_ops
-from tensorflow.python.ops.control_flow_ops import cond
-from tensorflow.python.framework.smart_cond import smart_cond
 
 class MeanSquaredError(tf.losses.Loss):
   def call(self, y_true, y_pred):
@@ -25,20 +23,6 @@ class MeanSquaredError(tf.losses.Loss):
     y_true = math_ops.cast(y_true, y_pred.dtype)
     return K.mean(math_ops.square(y_pred - y_true), axis=-1)
 
-class MeanAbsoluteError(tf.losses.Loss):
-  def call(self, y_true, y_pred):
-    y_pred = ops.convert_to_tensor(y_pred)
-    y_true = math_ops.cast(y_true, y_pred.dtype)
-    return K.mean(math_ops.abs(y_pred - y_true), axis=-1)
-
-class MinFalseNegativeError(tf.losses.Loss):
-  def call(self, y_true, y_pred):
-      y_pred = ops.convert_to_tensor(y_pred)
-      y_true = math_ops.cast(y_true, y_pred.dtype)
-      true_positives = K.round(K.sum(K.clip(y_true * y_pred, 0, 1)))
-      predicted_positives = K.sum(y_pred)
-      res = math_ops.abs((y_pred * y_true) * 5 + y_pred - y_true)
-      return K.mean(res, axis=-1)
 
 model = keras.Sequential([
     keras.layers.Dense(30, activation="relu",
@@ -59,10 +43,10 @@ model = keras.Sequential([
 
 #model.compile(loss="mse", optimizer="sgd")
 #sgd = keras.optimizers.SGD(nesterov=True, lr=1e-5)
-model.compile(loss=MinFalseNegativeError(), optimizer="adam")
+model.compile(loss=MeanSquaredError(), optimizer="adam")
 model.summary()
 
-history = model.fit(X_train, y_train, epochs=2000)
+history = model.fit(X_train, y_train, epochs=2000, class_weight={0: 1, 1: 5}) # Apporte un facteur 5 aux positifs
 eval = model.evaluate(X_test, y_test)
 print(eval)
 model.save("cancer.h5")

@@ -63,7 +63,7 @@ def emotion_analysis(emotions):
     plt.show()
 
 
-img = image.load_img("facenet/jackman.png", grayscale=True, target_size=(48, 48))
+img = image.load_img("facenet/monalisa.png", grayscale=True, target_size=(48, 48))
 
 x = image.img_to_array(img)
 x = np.expand_dims(x, axis=0)
