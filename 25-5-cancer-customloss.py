@@ -1,5 +1,4 @@
 from sklearn.datasets import load_breast_cancer
-import tensorflow.compat.v1 as tf
 cancer = load_breast_cancer() # more info : https://goo.gl/U2Uwz2
 X=cancer['data']
 y=cancer['target']
@@ -16,17 +15,19 @@ print(X_test)
 #from sklearn.neural_network import MLPClassifier
 #mlp = MLPClassifier(hidden_layer_sizes=(30,30,30))
 #import tensorflow as tf
-import tensorflow.keras as keras
 import tensorflow.compat.v1 as tf
+tf.enable_eager_execution()
+import tensorflow.keras as keras
 import numpy as np
-import keras.backend as K
+#import tensorflow.keras.backend as K
+import tensorflow.compat.v1.keras.backend as K
 
 
 def binary_recall_specificity(y_true, y_pred, recall_weight, spec_weight):
     # Pénalise les faux negatifs
     # Recall
 
-    TN = np.logical_and(K.eval(y_true) == 0, K.eval(y_pred) == 0)
+    TN = np.logical_and(tf.keras.backend.eval(y_true) == 0, K.eval(y_pred) == 0)
     TP = np.logical_and(K.eval(y_true) == 1, K.eval(y_pred) == 1)
 
     FP = np.logical_and(K.eval(y_true) == 0, K.eval(y_pred) == 1)
