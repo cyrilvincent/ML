@@ -35,10 +35,25 @@ class MinFalseNegativeError(tf.losses.Loss):
   def call(self, y_true, y_pred):
       y_pred = ops.convert_to_tensor(y_pred)
       y_true = math_ops.cast(y_true, y_pred.dtype)
-      true_positives = K.round(K.sum(K.clip(y_true * y_pred, 0, 1)))
-      predicted_positives = K.sum(y_pred)
-      res = math_ops.abs((y_pred * y_true) * 5 + y_pred - y_true)
+      res = math_ops.abs(((y_pred - 1) * y_true) * -5 + y_pred - y_true)
+
+      # y_pred y_true
+      # 0 0 => -1 * 0 * -5 + 0 - 0 = 0 Ok
+      # 1 1 => 0 * 1 * -5 + 1 - 1 = 0 Ok
+      # 1 0 (FP) => 0 * 0 * -5 + 1 - 0 = 1 OK
+      # 0 1 (FN) => -1 * 1 * - 5 + 0 - 1 = 4 OK
+      # y_clip si jamais y_pred > 1
+
       return K.mean(res, axis=-1)
+
+  class MinFalseNegativeCategoricalError(tf.loss.Loss):
+      def call(self, y_true, y_pred):
+          res = super().call(y_true, y_pred)
+          y_pred = ops.convert_to_tensor(y_pred)
+          y_true = math_ops.cast(y_true, y_pred.dtype)
+          y_clip = K.clip(y_pred, 0, 1)
+          res = math_ops.abs(((y_clip - 1) * y_true) * -5 + K.clip(y_pred - y_true, 0, 1)
+          return K.mean(res, axis=-1)
 
 model = keras.Sequential([
     keras.layers.Dense(30, activation="relu",

@@ -16,7 +16,7 @@ print(X_test)
 #mlp = MLPClassifier(hidden_layer_sizes=(30,30,30))
 #import tensorflow as tf
 import tensorflow.keras as keras
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 
 model = keras.Sequential([
     keras.layers.Dense(30, activation=tf.nn.relu,
@@ -27,20 +27,20 @@ model = keras.Sequential([
     keras.layers.Dense(1)
   ])
 
-# model = keras.Sequential()
-# model.add(keras.layers.Dense(30, activation=tf.nn.relu,
-#                        input_shape=(X_train.shape[1],)))
-# model.add(keras.layers.Dense(30, activation=tf.nn.relu))
-# model.add(keras.layers.Dense(30, activation=tf.nn.relu))
-# model.add(keras.layers.Dense(30, activation=tf.nn.relu))
-# model.add(keras.layers.Dense(1))
+import os
+path = "modelcp/cp-cancer-{epoch:04d}-{loss:.6f}.ckpt"
+mcpcb = tf.keras.callbacks.ModelCheckpoint(filepath=path,
+                                         save_weights_only=True,
+                                         save_best_only=True,
+                                         monitor='loss',
+                                         verbose=1)
 
 #model.compile(loss="mse", optimizer="sgd")
 #sgd = keras.optimizers.SGD(nesterov=True, lr=1e-5)
-model.compile(loss="mse", optimizer="adam")
+model.compile(loss="mse", optimizer="adam",metrics = ['mean_squared_error'])
 model.summary()
 
-history = model.fit(X_train, y_train, epochs=2000)
+history = model.fit(X_train, y_train, epochs=2000, callbacks=[mcpcb])
 eval = model.evaluate(X_test, y_test)
 print(eval)
 model.save("cancer.h5")

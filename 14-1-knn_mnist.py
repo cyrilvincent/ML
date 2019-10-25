@@ -9,7 +9,6 @@ print(len(data))
 
 import sklearn.model_selection as ms
 xtrain, xtest, ytrain, ytest = ms.train_test_split(data, target, train_size=0.8, test_size=0.2)
-
 import sklearn.neighbors as nn
 model = nn.KNeighborsClassifier(n_neighbors=3)
 model.fit(xtrain, ytrain)
