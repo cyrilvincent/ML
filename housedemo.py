@@ -1,4 +1,5 @@
 import csv
+import matplotlib.pyplot as plt
 
 with open("data/house/house.csv") as f:
     reader = list(csv.DictReader(f))
@@ -14,3 +15,9 @@ with open("data/house/house.csv") as f:
     # 2/ Critiquer ce nuage de point
     # 3/ Trouver un modèle mathématique
     # 4/ Calculer le loyer / m² moyen
+
+    plt.scatter(x,y)
+    plt.show()
+    
+    l = [float(row["loyer"]) / float(row["surface"]) for row in reader]
+    print(sum(l) / len(l))
