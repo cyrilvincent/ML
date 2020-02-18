@@ -13,3 +13,11 @@ print(X.shape) #569 * 30
 print(y.shape) #569
 print(y)
 
+model = sklm.LinearRegression()
+model.fit(X, y)
+prediction = model.predict(X)
+print(model.score(X,y))
+print(prediction > 0)
+print(model.coef_)
+
+
