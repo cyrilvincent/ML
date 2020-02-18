@@ -25,10 +25,10 @@ print(predicted - y_test)
 
 print(cancer.feature_names)
 features_importances = model.feature_importances_
-print(features_importances)
+print(list(zip(cancer.feature_names, features_importances)))
 
 import matplotlib.pyplot as plt
-plt.bar(range(len(features_importances)),features_importances)
+plt.bar(cancer.feature_names,features_importances)
 plt.show()
 
 import pickle
@@ -46,12 +46,15 @@ model_reinforced = model.fit(X_train, y_train)
 
 estimator = model_reinforced.estimators_[0]
 
-from sklearn.tree import export_graphviz
-# Export as dot file
-export_graphviz(estimator, out_file='tree.dot',
+import sklearn.tree
+
+plt.figure()
+sklearn.tree.plot_tree(estimator,
                 feature_names = cancer.feature_names,
                 class_names = cancer.target_names,
                 rounded = True, proportion = False,
                 precision = 2, filled = True)
+plt.show()
+
 
 

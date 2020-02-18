@@ -22,8 +22,3 @@ print('Score: %f' % score)
 predicted = model.predict(xtest)
 print(model.feature_importances_)
 
-x = float(input("Saisir un float entre 0 et 1 pour le ratio des pétales: "))
-y = float(input("Saisir un float entre 0 et 1 pour le ratio des tiges: "))
-x = [[x,y]]
-array = np.array(x)
-print(model.predict(array))
