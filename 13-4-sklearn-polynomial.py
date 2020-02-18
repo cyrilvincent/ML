@@ -28,7 +28,7 @@ plt.scatter(x_plot, f(x_plot))
 plt.plot(x_plot, y_plot)
 plt.show()
 import math
-print(model.score(X, y)) #75%
+print(model.score(X, y))
 
 import sklearn.preprocessing as pp
 import sklearn.pipeline as pipe

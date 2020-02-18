@@ -20,7 +20,7 @@ predict = model.predict(np.arange(400).reshape(-1,1))
 print(model.score(xtest, ytest))
 
 import matplotlib.pyplot as plt
-plt.scatter(xtest, ytest)
+plt.scatter(xtrain, ytrain)
 plt.plot(range(400), predict)
 print(model)
 plt.show()
