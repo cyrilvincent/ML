@@ -93,11 +93,3 @@ for i in range(10):
 plt.legend(loc='lower left')
 plt.show()
 
-model = pipe.make_pipeline(pp.FunctionTransformer(np.sin), sklm.Ridge())
-model.fit(X,y)
-y_plot = model.predict(X_plot)
-plt.scatter(x_plot, f(x_plot))
-plt.plot(x_plot, y_plot)
-plt.show()
-import math
-print(model.score(X, y)) #3%
