@@ -16,7 +16,7 @@ X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
 from sklearn.neural_network import MLPClassifier
-mlp = MLPClassifier(hidden_layer_sizes=(30,30,30))
+mlp = MLPClassifier(hidden_layer_sizes=(30,15), max_iter=10000)
 mlp.fit(X_train,y_train)
 
 predictions = mlp.predict(X_test)
