@@ -15,20 +15,22 @@ target = y_train[sample]
 x_train = x_train.astype("float32")
 x_test = x_test.astype("float32")
 
+x_train = x_train.reshape(-1,28*28)
+x_test = x_test.reshape(-1,28*28)
+
 y_train = keras.utils.to_categorical(y_train)
 y_test = keras.utils.to_categorical(y_test)
 
 model = keras.Sequential([
-    keras.layers.Dense(784, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.0001)),
-    keras.layers.Dense(500, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.0001)),
-    keras.layers.Dense(500, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.0001)),
-    keras.layers.Dense(500, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.0001)),
-    keras.layers.Dense(500, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.0001)),
-    keras.layers.Dense(500, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.0001)),
+    keras.layers.Dense(500, activation=tf.nn.relu, input_shape=(x_train.shape[1],)),
+    keras.layers.Dense(500, activation=tf.nn.relu),
+    keras.layers.Dense(500, activation=tf.nn.relu),
+    keras.layers.Dense(500, activation=tf.nn.relu),
+    keras.layers.Dense(500, activation=tf.nn.relu),
     keras.layers.Dense(10, activation=tf.nn.softmax),
   ])
 
 model.compile(loss="categorical_crossentropy", optimizer='adam', metrics=['accuracy'])
-trained = model.fit(x_train, y_train, epochs=10, batch_size=120, validation_data=(x_test, y_test))
+trained = model.fit(x_train, y_train, epochs=100, batch_size=10, validation_data=(x_test, y_test))
 print(model.summary())
 
