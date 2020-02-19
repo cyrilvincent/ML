@@ -20,7 +20,7 @@ model = keras.Sequential([
 
 model.compile(loss="binary_crossentropy", optimizer="rmsprop",metrics=['accuracy'])
 # binary_crossentropy ~= mse
-# for sigmoid mse € [0,1], bce € [0,inf], bce is convex, not mse (local minimum)
+# for sigmoid mse € [0,1], bce € [0,inf]
 model.summary()
 
 history = model.fit(X, y, epochs=200, batch_size=10, validation_split=0.2)

@@ -12,5 +12,7 @@ model = keras.Sequential([
 model.compile(loss="mse")
 model.summary()
 
-history = model.fit(X, y, epochs=10)
+history = model.fit(X, y, epochs=100, batch_size = 10)
+eval = model.evaluate(X, y)
+print(eval)
 

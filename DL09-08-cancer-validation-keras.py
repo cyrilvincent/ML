@@ -16,7 +16,7 @@ model = keras.Sequential([
 model.compile(loss="mse", optimizer="rmsprop",metrics=['accuracy'])
 model.summary()
 
-history = model.fit(X, y, epochs=200, batch_size=10, validation_split=0.2)
+history = model.fit(X, y, epochs=100, batch_size=10, validation_split=0.2)
 eval = model.evaluate(X, y)
 print(eval)
 
