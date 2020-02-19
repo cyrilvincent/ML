@@ -1,9 +1,5 @@
 import numpy as np
-import tensorflow as tf
-tf.random.set_seed(1)
 
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 X = []
 y = []
@@ -20,24 +16,16 @@ y = (y - 3.5) / 3.5
 print(X)
 print(y)
 
-import tensorflow.keras as keras
-model = keras.Sequential([
-    keras.layers.Dense(64, input_shape=(X.shape[1],)),
-    keras.layers.Dense(32),
-    keras.layers.Dense(16),
-    keras.layers.Dense(1)
-  ])
-
-model.compile(loss="mse")
-model.summary()
-
-history = model.fit(X, y, epochs=100, batch_size=1)
+import sklearn.neural_network
+model = sklearn.neural_network.MLPRegressor(hidden_layer_sizes=(64,32,16), max_iter=10000)
+print(X.shape, y.shape)
+model.fit(X, y)
 
 res = model.predict(X)
 print(res)
 for i in range(8):
     for j in range(8):
-        predict = int(round(res[i * 8 + j][0] * 3.5 + 3.5))
+        predict = int(round(res[i * 8 + j] * 3.5 + 3.5))
         print(f"{i}+{j}={predict} {i+j==predict}")
 
 
