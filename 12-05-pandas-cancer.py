@@ -21,3 +21,4 @@ print(prediction > 0)
 print(model.coef_)
 
 
+
