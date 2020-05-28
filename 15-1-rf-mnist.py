@@ -4,32 +4,15 @@ with np.load("data/mnist/mnist.npz", allow_pickle=True) as f:
     x_train, y_train = f['x_train'], f['y_train']
     x_test, y_test = f['x_test'], f['y_test']
 
-sample = np.random.randint(60000, size=2000)
+sample = np.random.randint(60000, size=60000)
 x_train = x_train[sample]
 y_train = y_train[sample]
 
 x_train = x_train.reshape(-1,784)
 x_test = x_test.reshape(-1,784)
 
-import sklearn.neighbors as nn
-model = nn.KNeighborsClassifier(n_neighbors=3)
-model.fit(x_train, y_train)
-score = model.score(x_test, y_test)
-print('Score: %f' % score)
-
-scores = []
-for k in range(3,6):
-    print(f"k:{k}")
-    model = nn.KNeighborsClassifier(k)
-    scores.append(model.fit(x_train, y_train).score(x_test, y_test))
-import matplotlib.pyplot as plt
-plt.plot(range(3,6), scores, 'o-')
-plt.show()
-
-min_nn = scores.index(max(scores)) + 2
-print("min_nn: "+str(min_nn))
-
-model = nn.KNeighborsClassifier(n_neighbors=min_nn)
+import sklearn.ensemble as rf
+model = rf.RandomForestClassifier(n_estimators=100)
 model.fit(x_train, y_train)
 score = model.score(x_test, y_test)
 print('Score: %f' % score)
@@ -37,12 +20,14 @@ print('Score: %f' % score)
 # On récupère les prédictions sur les données test
 predicted = model.predict(x_test)
 
+
 # On redimensionne les données sous forme d'images
 images = x_test.reshape((-1, 28, 28))
 
 # On selectionne un echantillon de 12 images au hasard
 select = np.random.randint(images.shape[0], size=12)
 
+import matplotlib.pyplot as plt
 # On affiche les images avec la prédiction associée
 for index, value in enumerate(select):
     plt.subplot(3,4,index+1)
