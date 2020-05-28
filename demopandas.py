@@ -12,5 +12,3 @@ dataset = pd.read_csv("data/house/house.csv")
 plt.scatter(dataset.surface, dataset.loyer)
 plt.show()
 
-import numpy as np
-x = np.nan
