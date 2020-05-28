@@ -7,10 +7,14 @@ model = linearmodel.LinearRegression()
 x = dataset.surface.values.reshape(-1,1) # shape(546) => (546,1) [1,2,3] x[1] => [[1,2,3]] x[0,1]
 y = dataset.loyer
 print(x)
-model.fit(x,y)
-print(model.score(x,y))
+
+import sklearn.model_selection as ms
+xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
+
+model.fit(xtrain,ytrain)
+print(model.score(xtest,ytest))
 print(model.coef_, model.intercept_)
-print(model.predict(x))
+print(model.predict(xtest))
 
 import matplotlib.pyplot as plt
 import numpy as np

@@ -33,8 +33,21 @@ print(slope, intercept, r_value, p_value, std_err)
 
 f = lambda x : slope * x + intercept
 plt.bar(ix, nbcas)
+
+
+import sklearn.preprocessing as pp
+import sklearn.pipeline as pipe
+import numpy as np
+import sklearn.linear_model as sklm
+model = pipe.make_pipeline(pp.PolynomialFeatures(4), sklm.Ridge())
+ix = np.array(ix).reshape(-1,1)
+nbcas = np.array(nbcas)
+model.fit(ix,nbcas)
+
+
 plt.show()
 plt.bar(ix, dcs)
+plt.plot(ix, model.predict(ix))
 plt.show()
 
 
