@@ -9,7 +9,8 @@ data = x_train[sample]
 target = y_train[sample]
 
 # On redimensionne les données sous forme d'images
-images = data.reshape((-1, 28, 28))
+
+images = data.reshape(-1, 28, 28) # (5000,28,28)
 
 # On selectionne un echantillon de 12 images au hasard
 select = np.random.randint(images.shape[0], size=12)
