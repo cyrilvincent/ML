@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 plt.scatter(x_plot, f(x_plot))
 plt.show()
 
-f = lambda x, a, b, c: a * x * np.sin(x * b) + c
+f = lambda x, a, b, c: a * x * np.sin(b * x) + c
 
 import scipy.optimize as opt
 print(x.shape)
