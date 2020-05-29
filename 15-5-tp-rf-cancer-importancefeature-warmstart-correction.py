@@ -22,13 +22,16 @@ predicted = model.predict(X_test)
 print(predicted)
 print(y_test)
 print(predicted - y_test)
-
 print(cancer.feature_names)
-features_importances = model.feature_importances_
-print(list(zip(cancer.feature_names, features_importances)))
-
+print(model.feature_importances_)
+#
+# print(cancer.feature_names)
+# features_importances = model.feature_importances_
+# l1[A, B, C] l2=[1,2,3] zip(l1,l2) [(A,1), (B,2), (C, 3)]
+print(list(zip(cancer.feature_names, model.feature_importances_)))
+#
 import matplotlib.pyplot as plt
-plt.bar(cancer.feature_names,features_importances)
+plt.bar(cancer.feature_names,model.feature_importances_)
 plt.show()
 
 import pickle
