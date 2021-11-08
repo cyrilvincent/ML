@@ -9,3 +9,6 @@ print(dataframe)
 # Filtrer les patients sains et malades
 # Afficher la moyenne (np.mean()) de radius_mean, concavity_se pour les 2 groupes de patients
 sains = dataframe[dataframe.diagnosis == 0]
+malades = dataframe[dataframe.diagnosis == 1]
+print(np.mean(sains.radius_mean), np.mean(malades.radius_mean))
+print(np.mean(sains.concavity_se), np.mean(malades.concavity_se))
