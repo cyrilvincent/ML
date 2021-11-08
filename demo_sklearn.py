@@ -9,21 +9,25 @@ import numpy as np
 print(sklearn.__version__)
 
 dataframe = pd.read_csv("data/house/house.csv")
+dataframe = dataframe[dataframe.surface < 200]
 
 x = dataframe.surface.values.reshape(-1, 1)
 y = dataframe.loyer
 
-model = lm.LinearRegression()
-model.fit(x, y)
-print(model.coef_, model.intercept_)
-print(model.score(x, y))
+# model = lm.LinearRegression()
+for i in range(8):
+    model = pipe.make_pipeline(pp.PolynomialFeatures(i), lm.Ridge(0))
+    model.fit(x, y)
+    # print(model.coef_, model.intercept_)
+    print(i, model.score(x, y))
 
-f = lambda x: model.coef_ * x + model.intercept_
 
-xpredict = np.arange(500).reshape(-1, 1)
+# f = lambda x: model.coef_ * x + model.intercept_
+
+xpredict = np.arange(200).reshape(-1, 1)
 ypredict = model.predict(xpredict)
-ylambda = f(xpredict)
+# ylambda = f(xpredict)
 plt.scatter(x, y)
 plt.plot(ypredict, color="red")
-plt.plot(ylambda, color="green")
+# plt.plot(ylambda, color="green")
 plt.show()
