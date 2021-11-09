@@ -13,14 +13,14 @@ print(sklearn.__version__)
 np.random.seed(0)
 
 dataframe = pd.read_csv("data/house/house.csv")
-dataframe = dataframe[dataframe.surface < 200]
+dataframe = dataframe[dataframe.surface < 400]
 
 x = dataframe.surface.values.reshape(-1, 1)
 y = dataframe.loyer
 
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x,y,train_size=0.8,test_size=0.2)
 
-model = lm.LinearRegression()
+model = None
 for i in range(5):
     model = pipe.make_pipeline(pp.PolynomialFeatures(i), lm.Ridge(0))
     model.fit(xtrain, ytrain)
