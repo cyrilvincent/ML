@@ -3,6 +3,9 @@ import numpy as np
 import sklearn.linear_model as lm
 import sklearn.neighbors as nn
 import sklearn.model_selection as ms
+import sklearn.ensemble as rf
+import matplotlib.pyplot as plt
+import sklearn.tree as tree
 
 np.random.seed(0)
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
@@ -22,12 +25,24 @@ print(x)
 
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x,y,train_size=0.8,test_size=0.2)
 
-# model = lm.LinearRegression()
-for k in range(3, 11, 2):
-    model = nn.KNeighborsClassifier(n_neighbors=k)
-    model.fit(xtrain, ytrain)
-    print(k, model.score(xtrain, ytrain))
-    print(k, model.score(xtest, ytest))
+# # model = lm.LinearRegression()
+# for k in range(3, 11, 2):
+#     model = nn.KNeighborsClassifier(n_neighbors=k)
+#     model.fit(xtrain, ytrain)
+#     print(k, model.score(xtrain, ytrain))
+#     print(k, model.score(xtest, ytest))
+
+model = rf.RandomForestClassifier()
+model.fit(xtrain, ytrain)
+print(model.score(xtest, ytest))
+print(model.feature_importances_)
+plt.bar(xtest.columns, model.feature_importances_)
+plt.xticks(rotation=45)
+plt.show()
+
+tree.export_graphviz(model.estimators_[0], out_file="data/breast-cancer/tree.dot", feature_names=xtrain.columns,
+                     class_names=["0", "1"], filled=True)
+
 
 # Créer le test_set et training_set
 # Test kNN avec différents k

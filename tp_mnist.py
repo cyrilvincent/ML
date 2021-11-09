@@ -1,5 +1,6 @@
 import numpy as np
 import sklearn.neighbors as nn
+import sklearn.ensemble as rf
 
 with np.load("data/mnist/mnist.npz", allow_pickle=True) as f:
     x_train, y_train = f["x_train"], f["y_train"]
@@ -9,7 +10,8 @@ print(x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 x_train = x_train.reshape(-1, 28*28)
 x_test = x_test.reshape(-1, 28*28)
 
-model = nn.KNeighborsClassifier(n_neighbors=3)
+# model = nn.KNeighborsClassifier(n_neighbors=3)
+model = rf.RandomForestClassifier()
 model.fit(x_train, y_train)
 print(model.score(x_test, y_test))
 
