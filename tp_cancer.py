@@ -6,6 +6,7 @@ import sklearn.model_selection as ms
 import sklearn.ensemble as rf
 import matplotlib.pyplot as plt
 import sklearn.tree as tree
+import pickle
 
 np.random.seed(0)
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
@@ -32,10 +33,21 @@ xtrain, xtest, ytrain, ytest = ms.train_test_split(x,y,train_size=0.8,test_size=
 #     print(k, model.score(xtrain, ytrain))
 #     print(k, model.score(xtest, ytest))
 
-model = rf.RandomForestClassifier()
+model = rf.RandomForestClassifier(warm_start=True)
 model.fit(xtrain, ytrain)
+
 print(model.score(xtest, ytest))
 print(model.feature_importances_)
+
+with open("data/breast-cancer/model-rf.pickle", "wb") as f:
+    pickle.dump(model, f)
+
+model = None
+
+with open("data/breast-cancer/model-rf.pickle", "rb") as f:
+    model = pickle.load(f)
+
+
 plt.bar(xtest.columns, model.feature_importances_)
 plt.xticks(rotation=45)
 plt.show()
