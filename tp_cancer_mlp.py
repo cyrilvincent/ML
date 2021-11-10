@@ -9,6 +9,7 @@ import sklearn.tree as tree
 import pickle
 import sklearn.neural_network as neural
 import sklearn.preprocessing as pp
+import sklearn.metrics as metrics
 
 np.random.seed(0)
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
@@ -52,3 +53,7 @@ model = None
 
 with open("data/breast-cancer/model-mlp.pickle", "rb") as f:
     model = pickle.load(f)
+
+prediction = model.predict(xtest)
+print(metrics.confusion_matrix(ytest, prediction))
+print(metrics.classification_report(ytest, prediction))
