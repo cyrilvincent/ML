@@ -2,6 +2,8 @@ import pandas as pd
 import sklearn.linear_model as lm
 import numpy as np
 import matplotlib.pyplot as plt
+import sklearn.preprocessing as pp
+import sklearn.pipeline as pipe
 
 dataframe = pd.read_csv("data/house/house.csv")
 dataframe = dataframe[dataframe.surface < 200]
@@ -16,19 +18,21 @@ x = dataframe.surface.values.reshape(-1, 1)
 y = dataframe.loyer
 
 # Instanciation du model
-model = lm.LinearRegression()
+# model = lm.LinearRegression()
+
+model = pipe.make_pipeline(pp.PolynomialFeatures(3), lm.Ridge())
 # Apprentissage
 model.fit(x, y)
-print(model.coef_, model.intercept_)
+# print(model.coef_, model.intercept_)
 # Prediction
 predicted = model.predict(np.arange(200).reshape(-1, 1))
 # Score
 score = model.score(x, y)
 print(score)
 
-f = lambda x: model.coef_ * x + model.intercept_
+# f = lambda x: model.coef_ * x + model.intercept_
 
 plt.scatter(dataframe.surface, dataframe.loyer)
 plt.plot(np.arange(200), predicted, color="red")
-plt.plot(np.arange(200), f(np.arange(200)), color="yellow")
+# plt.plot(np.arange(200), f(np.arange(200)), color="yellow")
 plt.show()

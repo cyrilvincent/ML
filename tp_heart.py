@@ -11,6 +11,9 @@ import pandas as pd
 import numpy as np
 import sklearn.linear_model as lm
 
+
+
+
 dataframe = pd.read_csv("data/heartdisease/data_with_nan.csv", na_values='.')
 dataframe = dataframe.drop("slope", axis=1).drop("ca", 1).drop("thal", 1)
 dataframe = dataframe.dropna()
