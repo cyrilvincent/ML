@@ -4,7 +4,7 @@ import numpy as np
 
 print(pd.__version__)
 
-dataframe = pd.read_csv("data/house/house.csv")
+dataframe = pd.read_csv("data/house/house.csv", na_values=".")
 # dataframe = pd.read_excel("data/house/house.xlsx")
 print(dataframe.describe())
 print(dataframe)
