@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 print(pd.__version__)
 
@@ -11,11 +12,15 @@ print(dataframe["surface"])
 print(dataframe.loyer)
 dataframe.to_html("data/house/house.html")
 
+loyer_par_m2 = dataframe.loyer / dataframe.surface
+print(loyer_par_m2.describe())
+
+
 plt.scatter(dataframe.surface, dataframe.loyer)
 plt.show()
 
 # Mini TP
-# Lire house.csv avzec Pandas
+# Lire house.csv avec Pandas
 # Afficher le describe
 # Calculer loyer par m² => describe
 # Afficher dans matplotlib
