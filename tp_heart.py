@@ -9,6 +9,7 @@
 
 import pandas as pd
 import numpy as np
+import sklearn.linear_model as lm
 
 dataframe = pd.read_csv("data/heartdisease/data_with_nan.csv", na_values='.')
 dataframe = dataframe.drop("slope", axis=1).drop("ca", 1).drop("thal", 1)
@@ -19,3 +20,18 @@ ko = dataframe[dataframe.num == 1]
 print(np.mean(ok.chol), np.std(ok.chol))
 print(np.mean(ko.chol), np.std(ko.chol))
 print(ko.corr())
+
+y = dataframe.num
+x = dataframe.drop("num", 1)
+
+print(x.shape)
+
+# Instanciation du model
+model = lm.LinearRegression()
+# Apprentissage
+model.fit(x, y)
+print(model.coef_, model.intercept_)
+# Prediction
+score = model.score(x, y)
+print(score)
+
