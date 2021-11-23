@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import pickle
 import sklearn.preprocessing as pp
 import sklearn.neural_network as neural
+import sklearn.metrics as metrics
 
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col='id')
 print(dataframe)
@@ -32,6 +33,14 @@ model = neural.MLPClassifier((30,10), max_iter=1000)
 model.fit(xtrain, ytrain)
 score = model.score(xtest, ytest)
 print(score)
+
+ypred = model.predict(xtest)
+print(metrics.accuracy_score(ytest, ypred))
+print(metrics.precision_score(ytest, ypred))
+
+print(metrics.classification_report(ytest, ypred))
+
+print(metrics.confusion_matrix(ytest, ypred))
 
 # with open(f"data/breast-cancer/rf_model_{score:.3f}.pickle", "wb") as f:
 #     pickle.dump(model, f)
