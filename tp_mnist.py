@@ -1,6 +1,9 @@
 import numpy as np
 import sklearn.neural_network as neural
 import sklearn.model_selection as ms
+import sklearn.metrics as metrics
+
+np.random.seed(0)
 
 with np.load("data/mnist/mnist.npz", allow_pickle=True) as f:
     x_train, y_train = f["x_train"], f["y_train"]
@@ -18,6 +21,10 @@ model.fit(x_train, y_train)
 print(model.score(x_test, y_test))
 
 predicted = model.predict(x_test)
+
+print(metrics.classification_report(y_test, predicted))
+print(metrics.confusion_matrix(y_test, predicted))
+
 images = x_test.reshape((-1, 28, 28))
 
 # On selectionne un echantillon de 12 images au hasard
