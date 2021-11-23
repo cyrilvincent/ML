@@ -10,6 +10,7 @@ import sklearn.preprocessing as pp
 import sklearn.neural_network as neural
 import sklearn.metrics as metrics
 import tensorflow.keras as keras
+import tensorflow as tf
 
 
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col='id')
@@ -22,6 +23,7 @@ x = dataframe.drop("diagnosis", 1)
 # Predict KNN
 
 np.random.seed(0)
+tf.random.set_seed(0)
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
 
 scaler = pp.RobustScaler()
@@ -29,11 +31,12 @@ scaler.fit(xtrain)
 xtrain = scaler.transform(xtrain)
 xtest = scaler.transform(xtest)
 
+
 model = keras.Sequential()
 model.add(keras.layers.Dense(30, activation="relu", input_shape=(xtrain.shape[1],)))
 model.add(keras.layers.Dense(10, activation="relu"))
-model.add(keras.layers.Dense(1, activation="relu"))
+model.add(keras.layers.Dense(1, activation="sigmoid"))
 model.compile(loss="mse", metrics="accuracy")
-model.fit(xtrain, ytrain, epochs=10, batch_size=1)
+model.fit(xtrain, ytrain, epochs=10, batch_size=10, validation_split=0.2)
 score = model.evaluate(xtest, ytest)
 print(score)
