@@ -16,3 +16,4 @@ def calc_y():
 y = calc_y()
 plt.scatter(x, y)
 plt.show()
+# comment
