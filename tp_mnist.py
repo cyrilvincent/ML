@@ -3,6 +3,9 @@ import sklearn.neural_network as neural
 import sklearn.model_selection as ms
 import sklearn.metrics as metrics
 import sklearn.neighbors as ne
+import sklearn.ensemble as rf
+from sklearn.tree import export_graphviz
+
 
 np.random.seed(0)
 
@@ -16,9 +19,19 @@ x_test = x_test.reshape(-1, 28*28)
 
 x_train, x_test, y_train, y_test = ms.train_test_split(x_train, y_train, train_size=0.1, test_size=0.9)
 
-model = ne.KNeighborsClassifier(n_neighbors=3)
+# model = ne.KNeighborsClassifier(n_neighbors=3)
+model = rf.RandomForestClassifier()
 model.fit(x_train, y_train)
 print(model.score(x_test, y_test))
+
+
+
+export_graphviz(model.estimators_[0],
+                out_file='data/mnist/tree.dot',
+                # feature_names = x_train.feature_names,
+                # class_names = y_train.target_names,
+                rounded = True, proportion = False,
+                precision = 2, filled = True)
 
 predicted = model.predict(x_test)
 
