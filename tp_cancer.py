@@ -15,8 +15,9 @@ x = dataframe.drop(["diagnosis", "id"], axis=1)
 
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x,y, train_size=0.8, test_size=0.2)
 # model = ne.KNeighborsClassifier(n_neighbors=5)
-# model = rf.RandomForestClassifier(warm_start=True)
-model = svm.SVC(kernel="linear")
+model = rf.RandomForestClassifier(warm_start=True)
+# model = svm.SVC(kernel="linear")
+
 model.fit(xtrain, ytrain)
 score = model.score(xtest, ytest)
 print(score)
