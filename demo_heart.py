@@ -1,5 +1,10 @@
 import pandas as pd
 import sklearn.linear_model as lm
+import sklearn.neighbors as nn
+import numpy as np
+
+np.random.seed(0)
+
 
 df = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 print(df)
@@ -11,10 +16,11 @@ print(ok_set.describe().T)
 print(ko_set.describe().T)
 print(df.corr())
 
-model = lm.LinearRegression()
+# model = lm.LinearRegression()
+model = nn.KNeighborsClassifier(n_neighbors=5)
 model.fit(training_set, df.num)
 predicted = model.predict(training_set)
 print(model.score(training_set, df.num))
 
-print(model.coef_, model.intercept_)
+# print(model.coef_, model.intercept_)
 
