@@ -6,6 +6,9 @@ import sklearn.ensemble as tree
 import matplotlib.pyplot as plt
 import sklearn.svm as svm
 import sklearn.preprocessing as pp
+import sklearn.neural_network as neural
+import xgboost as xg
+import sklearn.metrics as metrics
 
 df = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
 np.random.seed(0)
@@ -20,6 +23,8 @@ xtrain = scaler.transform(xtrain)
 xtest = scaler.transform(xtest)
 model = tree.RandomForestClassifier(n_estimators=100, max_depth=20)
 # model = svm.SVC(kernel="poly", degree=3)
+# model = neural.MLPClassifier(hidden_layer_sizes=(20,20,20), activation="relu") # 30,20,20,20,1
+# model = xg.XGBModel()
 model.fit(xtrain, ytrain)
 score = model.score(xtest, ytest)
 print(score)
@@ -31,6 +36,9 @@ plt.bar(x.columns, model.feature_importances_)
 plt.xticks(rotation=45)
 plt.show()
 print(len(ytest))
+
+print(metrics.classification_report(ytest, ypred))
+
 
 from sklearn.tree import export_graphviz
 export_graphviz(model.estimators_[0],

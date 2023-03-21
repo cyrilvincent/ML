@@ -33,6 +33,10 @@ with open("data/mnist/rf.pickle", "rb") as f:
     model = pickle.load(f)
 
 print(model.score(x_test, y_test))
+y_pred = model.predict(x_test)
+
+print(metrics.classification_report(y_test, y_pred))
+print(metrics.confusion_matrix(y_test, y_pred))
 
 
 
