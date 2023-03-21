@@ -10,6 +10,7 @@ df = pd.read_csv("data/house/house.csv")
 df = df[df.surface < 175]
 print(df)
 
+
 np.random.seed(0)
 xtrain, xtest, ytrain, ytest = ms.train_test_split(df.surface.values.reshape(-1, 1), df.loyer)
 

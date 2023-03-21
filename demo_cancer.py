@@ -23,6 +23,7 @@ print(model.feature_importances_)
 plt.bar(x.columns, model.feature_importances_)
 plt.xticks(rotation=45)
 plt.show()
+print(len(ytest))
 
 from sklearn.tree import export_graphviz
 export_graphviz(model.estimators_[0],
