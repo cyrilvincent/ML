@@ -1,16 +1,18 @@
 import tensorflow.keras as keras
 
 model = keras.models.load_model('data/dogsvscats/vgg16model-small.h5')
+newModel = keras.models.Sequential()
 
 for layer in model.layers[:-1]:
+    newModel.add(layer)
     layer.trainable = False
 
-model.add(keras.layers.Dense(3))
-model.add(keras.layers.Activation('softmax'))
+newModel.add(keras.layers.Dense(3, name="dense3"))
+newModel.add(keras.layers.Activation('softmax'))
 
-model.summary()
+newModel.summary()
 
-model.compile(loss='categorical_crossentropy',
+newModel.compile(loss='categorical_crossentropy',
               optimizer="rmsprop",
               metrics=['accuracy'])
 
@@ -36,12 +38,12 @@ validationGenerator = trainset.flow_from_directory(
         batch_size=batchSize)
 
 
-model.fit(
+newModel.fit(
         trainGenerator,
         epochs=30,
         validation_data=validationGenerator,
 )
 
-model.save('data/dogsvscats/vgg16model-cows.h5')
+newModel.save('data/dogsvscats/vgg16model-cows.h5')
 
 

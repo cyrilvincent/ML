@@ -49,7 +49,6 @@ model.fit(
 )
 
 model.save('data/dogsvscats/vgg16model-small.h5')
-model.save_weights('data/dogsvscats/vgg16model-weights-small.h5')
 
 
 
