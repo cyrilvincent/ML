@@ -20,22 +20,24 @@ x_test = x_test.reshape(-1,28*28)
 y_train = keras.utils.to_categorical(y_train)
 y_test = keras.utils.to_categorical(y_test)
 
-sample = np.random.randint(60000, size=1000)
-x_train = x_train[sample]
-y_train = y_train[sample]
+# sample = np.random.randint(60000, size=1000)
+# x_train = x_train[sample]
+# y_train = y_train[sample]
 
 model = keras.Sequential([
     keras.layers.Dense(600, input_shape=(x_train.shape[1],)),
     keras.layers.Dense(400, activation="relu"),
     keras.layers.Dense(200, activation="relu"),
     keras.layers.Dense(100, activation="relu"),
+    keras.layers.Dropout(0.5),
     keras.layers.Dense(10, activation=tf.nn.softmax),
   ])
 
 model.compile(loss="categorical_crossentropy", metrics=['accuracy'])
 model.summary()
-trained = model.fit(x_train, y_train, epochs=20, batch_size=10,validation_data=(x_test, y_test))
+trained = model.fit(x_train, y_train, epochs=40, batch_size=10,validation_data=(x_test, y_test))
 
+model.save("data/mnist/mlp.h5")
 
 predicted = model.predict(x_test)
 
