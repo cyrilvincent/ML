@@ -18,8 +18,15 @@ xko = ko.drop("num", axis=1)
 print(xok.describe().T)
 print(xko.describe().T)
 
+model = lm.LinearRegression()
+model.fit(x, y)
+print(model.score(x, y))
+y_pred = model.predict(x)
+print(y_pred)
+print(model.coef_, model.intercept_)
+
 # Instancier le LinearModel
-# Fit sans values.reshape
+# Fit sans values.reshape sur x
 # Predict
 # afficher coef et intercept
 # Score
