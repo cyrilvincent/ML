@@ -22,7 +22,7 @@ x_test = x_test.reshape(-1, 28*28)
 
 # model = nn.KNeighborsClassifier(n_neighbors=5)
 # model = tree.RandomForestClassifier(warm_start=True)
-model = svm.SVC(kernel="poly")
+model = svm.SVC(C=0.1,kernel="poly")
 model.fit(x_train, y_train)
 
 with open("data/mnist/rf.pickle", "wb") as f:
@@ -33,6 +33,7 @@ model = None
 with open("data/mnist/rf.pickle", "rb") as f:
     model = pickle.load(f)
 
+model.fit()
 
 
 print(model.score(x_test, y_test))
