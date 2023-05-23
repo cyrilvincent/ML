@@ -4,6 +4,9 @@ import numpy as np
 import sklearn.model_selection as ms
 import sklearn.metrics as metrics
 import sklearn.neighbors as nn
+import sklearn.ensemble as tree
+import sklearn.svm as svm
+import pickle
 
 np.random.seed(0)
 
@@ -17,8 +20,20 @@ x_test = x_test.reshape(-1, 28*28)
 
 # x_train, x_test, y_train, y_test = ms.train_test_split(x_train, y_train, train_size=0.1, test_size=0.9)
 
-model = nn.KNeighborsClassifier(n_neighbors=5)
+# model = nn.KNeighborsClassifier(n_neighbors=5)
+# model = tree.RandomForestClassifier(warm_start=True)
+model = svm.SVC(kernel="poly")
 model.fit(x_train, y_train)
+
+with open("data/mnist/rf.pickle", "wb") as f:
+    pickle.dump(model, f)
+
+model = None
+
+with open("data/mnist/rf.pickle", "rb") as f:
+    model = pickle.load(f)
+
+
 
 print(model.score(x_test, y_test))
 
