@@ -21,7 +21,6 @@ model = nn.KNeighborsClassifier(n_neighbors=5)
 model.fit(x_train, y_train)
 
 print(model.score(x_test, y_test))
-y_pred = model.predict(x_test)
 
 predicted = model.predict(x_test)
 
