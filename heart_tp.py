@@ -3,10 +3,15 @@ import numpy as np
 import sklearn
 import sklearn.linear_model as lm
 import matplotlib.pyplot as plt
+import sklearn.model_selection as ms
 
 df = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 y = df.num
 x = df.drop("num", axis=1)
+
+xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
+
+
 print(y.describe())
 print(x.describe().T)
 
@@ -19,9 +24,9 @@ print(xok.describe().T)
 print(xko.describe().T)
 
 model = lm.LinearRegression()
-model.fit(x, y)
-print(model.score(x, y))
-y_pred = model.predict(x)
+model.fit(xtrain, ytrain)
+print(model.score(xtrain, ytrain), model.score(xtest, ytest))
+y_pred = model.predict(xtest)
 print(y_pred)
 print(model.coef_, model.intercept_)
 
