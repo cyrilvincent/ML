@@ -9,25 +9,27 @@ tf.random.set_seed(1)
 
 dataframe = pandas.read_csv("data/breast-cancer/data.csv", index_col="id")
 y = dataframe.diagnosis
-x = dataframe.drop("diagnosis", 1)
+x = dataframe.drop("diagnosis", axis=1)
 
 scaler = sklearn.preprocessing.RobustScaler()
 scaler.fit(x)
 X = scaler.transform(x)
 
 model = keras.Sequential([
-    keras.layers.Dense(40, activation=tf.nn.relu,
+    keras.layers.Dense(30, activation=tf.nn.relu,
                        input_shape=(X.shape[1],)),
-    keras.layers.Dropout(0.5),
+    keras.layers.Dropout(0.2),
     keras.layers.Dense(30, activation=tf.nn.relu),
-    keras.layers.Dropout(0.5),
+    keras.layers.Dropout(0.2),
     keras.layers.Dense(30, activation=tf.nn.relu),
-    keras.layers.Dropout(0.5),
+    keras.layers.Dropout(0.2),
+    keras.layers.Dense(30, activation=tf.nn.relu),
+    keras.layers.Dropout(0.2),
     keras.layers.Dense(1, activation=tf.nn.sigmoid)
   ])
 
 sgd = keras.optimizers.SGD(nesterov=True, lr=1e-4)
-model.compile(loss="binary_crossentropy",metrics=['accuracy'])
+model.compile(loss="binary_crossentropy",metrics=['accuracy'],optimizer=sgd)
 model.summary()
 
 history = model.fit(x, y, epochs=200, batch_size=10, validation_split=0.2)
