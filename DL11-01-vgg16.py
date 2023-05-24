@@ -22,6 +22,6 @@ predicted = model.predict(image)
 # convert the probabilities to class labels
 label = decode_predictions(predicted)
 # retrieve the most likely result, e.g. highest probability
-label = label[0][0]
+label = label[0][2]
 # print the classification
 print('%s (%.2f%%)' % (label[1], label[2]*100))
