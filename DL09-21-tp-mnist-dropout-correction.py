@@ -20,7 +20,7 @@ x_test = x_test.reshape(-1,28*28)
 y_train = keras.utils.to_categorical(y_train)
 y_test = keras.utils.to_categorical(y_test)
 
-sample = np.random.randint(60000, size=10000)
+sample = np.random.randint(60000, size=60000)
 x_train = x_train[sample]
 y_train = y_train[sample]
 
@@ -37,7 +37,7 @@ model = keras.Sequential([
   ])
 
 model.compile(loss="categorical_crossentropy", metrics=['accuracy'])
-trained = model.fit(x_train, y_train, epochs=20, batch_size=10, validation_data=(x_test, y_test))
+trained = model.fit(x_train, y_train, epochs=40, batch_size=2, validation_data=(x_test, y_test))
 print(model.evaluate(x_test, y_test))
 model.save("data/h5/mnist_mlp_dropout_rms.h5")
 
