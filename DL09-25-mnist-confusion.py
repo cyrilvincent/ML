@@ -33,30 +33,15 @@ model = keras.Sequential([
   ])
 
 model.compile(loss="categorical_crossentropy", metrics=['accuracy'])
-model.summary()
-trained = model.fit(x_train, y_train, epochs=20, batch_size=10,validation_data=(x_test, y_test))
-
+trained = model.fit(x_train, y_train, epochs=10, batch_size=10,validation_data=(x_test, y_test))
+print(model.summary())
 
 predicted = model.predict(x_test)
-
 import matplotlib.pyplot as plt
 # Gestion des erreurs
 # on récupère les données mal prédites
 predicted = predicted.argmax(axis=1)
-misclass = (y_test.argmax(axis=1) != predicted)
-x_test = x_test.reshape((-1, 28, 28))
-misclass_images = x_test[misclass,:,:]
-misclass_predicted = predicted[misclass]
 
-# on sélectionne un échantillon de ces images
-select = np.random.randint(misclass_images.shape[0], size=12)
-
-# on affiche les images et les prédictions (erronées) associées à ces images
-for index, value in enumerate(select):
-    plt.subplot(3,4,index+1)
-    plt.axis('off')
-    plt.imshow(misclass_images[value],cmap=plt.cm.gray_r,interpolation="nearest")
-    plt.title('Predicted: %i' % misclass_predicted[value])
-
-plt.show()
-
+import sklearn.metrics
+print(sklearn.metrics.confusion_matrix(y_test.argmax(axis=1),predicted))
+print(sklearn.metrics.classification_report(y_test.argmax(axis=1),predicted))
