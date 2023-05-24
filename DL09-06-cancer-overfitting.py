@@ -7,7 +7,7 @@ tf.random.set_seed(1)
 
 dataframe = pandas.read_csv("data/breast-cancer/data.csv", index_col="id")
 y = dataframe.diagnosis
-x = dataframe.drop("diagnosis", 1)
+x = dataframe.drop("diagnosis", axis=1)
 
 model = keras.Sequential([
     keras.layers.Dense(30, activation=tf.nn.relu,

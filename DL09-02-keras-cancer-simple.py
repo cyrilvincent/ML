@@ -7,7 +7,7 @@ tf.random.set_seed(1)
 
 dataframe = pandas.read_csv("data/breast-cancer/data.csv", index_col="id")
 y = dataframe.diagnosis
-x = dataframe.drop("diagnosis", 1)
+x = dataframe.drop("diagnosis", axis = 1)
 print(x.shape)
 
 model = keras.Sequential([
@@ -20,7 +20,7 @@ model = keras.Sequential([
 model.compile(loss="mse", metrics="accuracy")
 model.summary()
 
-history = model.fit(x, y, epochs=100)
+history = model.fit(x, y, epochs=20)
 
 predicted = model.predict(x)
 print(model.evaluate(x,y))
