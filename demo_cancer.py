@@ -18,10 +18,12 @@ model = rf.RandomForestClassifier(max_depth=4)
 model.fit(xtrain, ytrain)
 print(model.score(xtrain, ytrain))
 print(model.score(xtest, ytest))
+score = model.score(xtest, ytest)
+comment = "Mon commentaire", 3.14
 
 print(model.feature_importances_)
 
-with open("data/breast-cancer/rf.pickle", "wb") as f:
+with open(f"data/breast-cancer/rf-{int(score * 100)}.pickle", "wb") as f:
     pickle.dump(model, f)
 
 plt.bar(x.columns, model.feature_importances_)
