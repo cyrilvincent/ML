@@ -5,6 +5,7 @@ import sklearn.model_selection as ms
 import numpy as np
 import sklearn.ensemble as rf
 import matplotlib.pyplot as plt
+import pickle
 
 np.random.seed(0)
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
@@ -19,6 +20,9 @@ print(model.score(xtrain, ytrain))
 print(model.score(xtest, ytest))
 
 print(model.feature_importances_)
+
+with open("data/breast-cancer/rf.pickle", "wb") as f:
+    pickle.dump(model, f)
 
 plt.bar(x.columns, model.feature_importances_)
 plt.xticks(rotation=45)
