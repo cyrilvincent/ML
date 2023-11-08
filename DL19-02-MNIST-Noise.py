@@ -15,7 +15,7 @@ x_test = x_test[..., tf.newaxis]
 print(x_train.shape)
 
 # Add noise
-noise_factor = 0.15
+noise_factor = 0.1
 x_train_noisy = x_train + noise_factor * tf.random.normal(shape=x_train.shape)
 x_test_noisy = x_test + noise_factor * tf.random.normal(shape=x_test.shape)
 x_train_noisy = tf.clip_by_value(x_train_noisy, clip_value_min=0., clip_value_max=1.)

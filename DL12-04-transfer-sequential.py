@@ -4,7 +4,6 @@ model = keras.applications.vgg16.VGG16(include_top=False, weights="imagenet", in
 newModel = keras.models.Sequential()
 for l in model.layers:
     newModel.add(l)
-    l.trainable = False
 model = newModel
 model.add(keras.layers.Flatten())
 model.add(keras.layers.Dense(512))

@@ -2,9 +2,11 @@ import tensorflow.keras as keras
 
 model = keras.models.load_model('data/dogsvscats/vgg16model-small.h5')
 
-for layer in model.layers[:-1]:
+for layer in model.layers[:-3]:
     layer.trainable = False
 
+model.add(keras.layers.Dense(50))
+model.add(keras.layers.Activation('softmax'))
 model.add(keras.layers.Dense(3))
 model.add(keras.layers.Activation('softmax'))
 
