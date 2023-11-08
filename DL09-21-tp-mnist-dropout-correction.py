@@ -10,8 +10,8 @@ with np.load("data/mnist/mnist.npz", allow_pickle=True) as f:
 x_train = x_train.astype("float32")
 x_test = x_test.astype("float32")
 
-x_train /= 255
-x_test /= 255
+x_train = (x_train - 127.5) / 127.5
+x_test = (x_test - 127.5) / 127.5
 
 x_train = x_train.reshape(-1,28*28)
 x_test = x_test.reshape(-1,28*28)
@@ -30,11 +30,12 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dropout(0.1),
     tf.keras.layers.Dense(10, activation=tf.nn.softmax),
   ])
-model.compile(loss="categorical_crossentropy", metrics=['accuracy'])
+model.compile(loss="categorical_crossentropy", metrics=['accuracy'], optimizer="sgd")
 trained = model.fit(x_train, y_train, epochs=5, batch_size=10,validation_data=(x_test, y_test))
 print(model.summary())
 
 predicted = model.predict(x_test)
+print(predicted[0])
 
 model.save("data/h5/mnist.h5")
 

@@ -11,8 +11,8 @@ with np.load("data/mnist/mnist.npz", allow_pickle=True) as f:
 x_train = x_train.astype("float32")
 x_test = x_test.astype("float32")
 
-x_train /= 255
-x_test /= 255
+x_train = (x_train - 127.5) / 127.5
+x_test = (x_test - 127.5) / 127.5
 
 x_train = x_train.reshape(-1,28*28)
 x_test = x_test.reshape(-1,28*28)
@@ -25,5 +25,5 @@ model = tf.keras.models.load_model("data/h5/mnist.h5")
 predicted = model.predict(x_test)
 
 import sklearn.metrics
-print(sklearn.metrics.confusion_matrix(y_test.argmax(axis=1), predicted))
-print(sklearn.metrics.classification_report(y_test.argmax(axis=1), predicted))
+print(sklearn.metrics.confusion_matrix(y_test.argmax(axis=1), predicted.argmax(axis=1)))
+print(sklearn.metrics.classification_report(y_test.argmax(axis=1), predicted.argmax(axis=1)))

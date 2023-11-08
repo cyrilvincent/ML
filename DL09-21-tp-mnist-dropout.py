@@ -10,8 +10,8 @@ with np.load("data/mnist/mnist.npz", allow_pickle=True) as f:
 x_train = x_train.astype("float32")
 x_test = x_test.astype("float32")
 
-x_train /= 255
-x_test /= 255
+x_train = (x_train - 127.5) / 127.5
+x_test = (x_test - 127.5) / 127.5
 
 x_train = x_train.reshape(-1,28*28)
 x_test = x_test.reshape(-1,28*28)
