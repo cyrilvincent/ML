@@ -44,14 +44,14 @@ def train():
     batchSize = 16
 
     trainGenerator = trainset.flow_from_directory(
-            'data/dogsvscats/train',
+            'data/dogsvscats/small/train',
             target_size=(150, 150),
             subset = 'training',
             class_mode="binary",
             batch_size=batchSize)
 
     validationGenerator = trainset.flow_from_directory(
-            'data/dogsvscats/train',
+            'data/dogsvscats/small/train',
             target_size=(150, 150),
             class_mode="binary",
             subset = 'validation',
