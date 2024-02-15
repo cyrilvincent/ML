@@ -7,6 +7,7 @@ import sklearn.neighbors as nn
 import sklearn.ensemble as tree
 import sklearn.svm as svm
 import pickle
+import sklearn.svm as svm
 
 np.random.seed(0)
 
@@ -18,7 +19,8 @@ print(x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 x_train = x_train.reshape(-1, 28*28)
 x_test = x_test.reshape(-1, 28*28)
 
-model = nn.KNeighborsClassifier(n_neighbors=3)
+#model = nn.KNeighborsClassifier(n_neighbors=3)
+model = svm.SVC(1, kernel="poly", degree=3)
 model.fit(x_train, y_train)
 
 print(model.score(x_test, y_test), model.score(x_train, y_train))
