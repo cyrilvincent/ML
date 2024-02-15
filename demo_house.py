@@ -7,6 +7,7 @@ import sklearn.linear_model as lm
 import sklearn.pipeline as pipe
 import sklearn.preprocessing as pp
 import matplotlib.pyplot as plt
+import sklearn.model_selection as ms
 
 # Pandas
 dataframe = pd.read_csv("data/house/house.csv")
@@ -17,6 +18,8 @@ dataframe = dataframe[dataframe.surface < 200]
 dataframe["loyer_per_m2"] = dataframe.loyer / dataframe.surface
 print(dataframe.head())
 print(dataframe.describe())
+
+
 
 plt.scatter(dataframe.surface, dataframe.loyer)
 # plt.show()
