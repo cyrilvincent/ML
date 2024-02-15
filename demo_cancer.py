@@ -1,7 +1,9 @@
 import pandas as pd
 import sklearn.neighbors as nn
 import sklearn.model_selection as ms
+import sklearn.ensemble as rf
 import numpy as np
+import matplotlib.pyplot as plt
 
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
 print(dataframe.describe().T)
@@ -13,8 +15,14 @@ np.random.seed(0)
 
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
 
-model = nn.KNeighborsClassifier(n_neighbors=3)
-
+#model = nn.KNeighborsClassifier(n_neighbors=3)
+model = rf.RandomForestClassifier(max_depth=4)
 model.fit(xtrain, ytrain)
 
 print(model.score(xtest, ytest), model.score(xtrain, ytrain))
+
+print(model.feature_importances_)
+
+plt.bar(x.columns, model.feature_importances_)
+plt.xticks(rotation=45)
+plt.show()
