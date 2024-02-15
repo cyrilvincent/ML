@@ -23,6 +23,15 @@ print(model.score(xtest, ytest), model.score(xtrain, ytrain))
 
 print(model.feature_importances_)
 
+from sklearn.tree import export_graphviz
+export_graphviz(model.estimators_[0],
+                 out_file='data/breast-cancer/tree.dot',
+                 feature_names = x.columns,
+                 class_names = str(y),
+                 rounded = True, proportion = False,
+                 precision = 2, filled = True)
+
 plt.bar(x.columns, model.feature_importances_)
 plt.xticks(rotation=45)
 plt.show()
+
