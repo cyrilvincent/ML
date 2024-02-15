@@ -27,8 +27,7 @@ from sklearn.tree import export_graphviz
 export_graphviz(model.estimators_[0],
                  out_file='data/breast-cancer/tree.dot',
                  feature_names = x.columns,
-                 class_names = str(y),
-                 rounded = True, proportion = False,
+                  rounded = True, proportion = False,
                  precision = 2, filled = True)
 
 plt.bar(x.columns, model.feature_importances_)
