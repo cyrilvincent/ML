@@ -4,6 +4,7 @@ import sklearn.model_selection as ms
 import sklearn.ensemble as rf
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
 print(dataframe.describe().T)
@@ -21,13 +22,23 @@ model.fit(xtrain, ytrain)
 
 print(model.score(xtest, ytest), model.score(xtrain, ytrain))
 
+with open("data/breast-cancer/cancer.pickle", "wb") as f:
+    pickle.dump(model, f)
+
+model = None
+
+with open("data/breast-cancer/cancer.pickle", "rb") as f:
+    model = pickle.load(f)
+
+
 print(model.feature_importances_)
 
 from sklearn.tree import export_graphviz
 export_graphviz(model.estimators_[0],
                  out_file='data/breast-cancer/tree.dot',
                  feature_names = x.columns,
-                  rounded = True, proportion = False,
+                 class_names = ["0", "1"],
+                 rounded = True, proportion = False,
                  precision = 2, filled = True)
 
 plt.bar(x.columns, model.feature_importances_)
