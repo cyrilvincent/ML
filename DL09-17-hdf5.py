@@ -8,7 +8,7 @@ tf.random.set_seed(1)
 
 dataframe = pandas.read_csv("data/breast-cancer/data.csv", index_col="id")
 y = dataframe.diagnosis
-x = dataframe.drop("diagnosis", 1)
+x = dataframe.drop("diagnosis", axis=1)
 
 scaler = sklearn.preprocessing.RobustScaler()
 scaler.fit(x)
@@ -29,7 +29,7 @@ history = model.fit(x, y, epochs=20, batch_size=10, validation_split=0.2)
 eval = model.evaluate(x, y)
 print(eval)
 
-model.save("data/h5/cancer-mlp.h5")
+model.save("data/breast-cancer/cancer-mlp.h5")
 
 # model = tf.keras.models.load_model("data/h5/cancer-mlp.h5") #No need to have the model structure
 
