@@ -13,3 +13,9 @@ print(dataframe.corr())
 
 y = dataframe.num
 x = dataframe.drop("num", axis=1)
+
+model = lm.LinearRegression()
+model.fit(x, y)
+ypred = model.predict(x)
+score = model.score(x, y)
+print(score)
