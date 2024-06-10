@@ -20,6 +20,7 @@ x_train = x_train.reshape(-1, 28*28)
 x_test = x_test.reshape(-1, 28*28)
 
 model = nn.KNeighborsClassifier(n_neighbors=3)
+model.fit(x_train, y_train)
 
 print(model.score(x_test, y_test), model.score(x_train, y_train))
 predicted = model.predict(x_test)
