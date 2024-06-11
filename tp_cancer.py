@@ -14,7 +14,7 @@ np.random.seed(42)
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
 print(xtest.shape, ytest.shape)
 
-model = rf.RandomForestClassifier()
+model = rf.RandomForestClassifier(max_depth=5)
 model.fit(xtrain, ytrain)
 # for k in range(1, 15, 2):
 #     model = neighbors.KNeighborsClassifier(n_neighbors=k)
