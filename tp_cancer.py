@@ -6,6 +6,7 @@ import sklearn.ensemble as rf
 import matplotlib.pyplot as plt
 import pickle
 import sklearn.svm as svm
+import sklearn.neural_network as nn
 
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
 print(dataframe)
@@ -17,7 +18,8 @@ xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_si
 print(xtest.shape, ytest.shape)
 
 # model = rf.RandomForestClassifier(max_depth=5)
-model = svm.SVC(C=0.2, kernel="poly", degree=3)
+# model = svm.SVC(C=0.2, kernel="poly", degree=3)
+model = nn.MLPClassifier(hidden_layer_sizes=(30,30,30))
 model.fit(xtrain, ytrain)
 # for k in range(1, 15, 2):
 #     model = neighbors.KNeighborsClassifier(n_neighbors=k)
