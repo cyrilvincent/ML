@@ -10,6 +10,7 @@ import pickle
 import sklearn.svm as svm
 import sklearn.ensemble as rf
 import pickle
+import matplotlib.pyplot as plt
 
 np.random.seed(0)
 
@@ -31,7 +32,13 @@ with open("data/mnist/rf.pickle", "wb") as f:
 print(model.score(x_test, y_test), model.score(x_train, y_train))
 predicted = model.predict(x_test)
 
+matrix = model.feature_importances_.reshape(28, 28)
+plt.imshow(matrix)
+plt.show()
+
 images = x_test.reshape((-1, 28, 28))
+
+
 
 # On selectionne un echantillon de 12 images au hasard
 select = np.random.randint(images.shape[0], size=12)
@@ -63,4 +70,6 @@ for index, value in enumerate(select):
     plt.title('Predicted: %i' % misclass_predicted[value])
 
 plt.show()
+
+
 
