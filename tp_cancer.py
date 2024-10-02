@@ -8,9 +8,12 @@ import numpy as np
 import sklearn.neighbors as nn
 import sklearn.model_selection as ms
 import sklearn.preprocessing as pp
+import sweetviz
 
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
 print(dataframe.describe())
+report = sweetviz.analyze(dataframe)
+report.show_html("data/breast-cancer/report.html")
 
 np.random.seed(42)
 
