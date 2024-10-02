@@ -17,6 +17,7 @@ import numpy as np
 import sklearn.neighbors as nn
 import sklearn.ensemble as rf
 import matplotlib.pyplot as plt
+import pickle
 
 np.random.seed(42)
 
@@ -38,6 +39,11 @@ xtrain, xtest,ytrain,ytest = ms.train_test_split(x,y,train_size=0.8,test_size=0.
 model = rf.RandomForestClassifier()
 model.fit(xtrain, ytrain)
 print(model.score(xtest, ytest))
+
+with open("data/heartdisease/rf.pickle", "wb") as f:
+    pickle.dump(model, f)
+
+
 ypred = model.predict(xtest)
 
 print(model.feature_importances_)
