@@ -11,6 +11,8 @@ import sklearn.preprocessing as pp
 import sklearn.ensemble as rf
 import sweetviz
 import matplotlib.pyplot as plt
+import pickle
+import sklearn.svm as svm
 
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
 print(dataframe.describe())
@@ -40,10 +42,13 @@ xtest = scaler.transform(xtest)
 #     print(scoretrain, scoretest)
 
 model = rf.RandomForestClassifier(max_leaf_nodes=20)
+model = svm.SVC(C=0.1)
 model.fit(xtrain, ytrain)
 scoretrain = model.score(xtrain, ytrain)
 scoretest = model.score(xtest, ytest)
 print(scoretrain, scoretest)
+with open(f"data/breast-cancer/rf-{int(scoretest*100)}.pickle", "wb") as f:
+    pickle.dump((scaler, model), f)
 
 ypred = model.predict(xtest)
 print(ypred)

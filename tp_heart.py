@@ -18,6 +18,8 @@ import sklearn.neighbors as nn
 import sklearn.ensemble as rf
 import matplotlib.pyplot as plt
 import pickle
+import sklearn.svm as svm
+import sklearn.neural_network as neural
 
 np.random.seed(42)
 
@@ -36,25 +38,28 @@ xtrain, xtest,ytrain,ytest = ms.train_test_split(x,y,train_size=0.8,test_size=0.
 
 # model = lm.LinearRegression()
 # model = nn.KNeighborsClassifier(n_neighbors=3)
-model = rf.RandomForestClassifier()
+# model = rf.RandomForestClassifier()
+# model = svm.SVC(C=1.0)
+model = neural.MLPClassifier((30,30,30))
 model.fit(xtrain, ytrain)
-print(model.score(xtest, ytest))
+score = model.score(xtest, ytest)
+print(score)
 
-with open("data/heartdisease/rf.pickle", "wb") as f:
+with open(f"data/heartdisease/svm-{int(score * 100)}.pickle", "wb") as f:
     pickle.dump(model, f)
 
 
 ypred = model.predict(xtest)
 
-print(model.feature_importances_)
-plt.bar(x.columns, model.feature_importances_)
+# print(model.feature_importances_)
+# plt.bar(x.columns, model.feature_importances_)
 plt.show()
-
-from sklearn.tree import export_graphviz
-export_graphviz(model.estimators_[0],
-                out_file="data/heartdisease/tree.dot",
-                feature_names=x.columns,
-                class_names=["0", "1"],
-                rounded=True, proportion=False, precision=2, filled=True)
+#
+# from sklearn.tree import export_graphviz
+# export_graphviz(model.estimators_[0],
+#                 out_file="data/heartdisease/tree.dot",
+#                 feature_names=x.columns,
+#                 class_names=["0", "1"],
+#                 rounded=True, proportion=False, precision=2, filled=True)
 
 

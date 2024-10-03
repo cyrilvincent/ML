@@ -5,11 +5,10 @@ tf.random.set_seed(1)
 X=np.array([[0,0],[0,1],[1,0],[1,1]])
 y=np.array([0,0,0,1])
 
-import tensorflow.keras as keras
-model = keras.Sequential([
-    keras.layers.Dense(4, input_shape=(X.shape[1],)),
-    keras.layers.Dense(8),
-    keras.layers.Dense(1)
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(4, input_shape=(X.shape[1],)),
+    tf.keras.layers.Dense(8),
+    tf.keras.layers.Dense(1)
   ])
 
 model.compile(loss="mse")

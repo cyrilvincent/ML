@@ -24,14 +24,10 @@ x_train = x_train[sample]
 y_train = y_train[sample]
 
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(600, input_shape=(x_train.shape[1],)),
-    tf.keras.layers.Dense(400, activation="relu"),
-    tf.keras.layers.Dense(200, activation="relu"),
-    tf.keras.layers.Dense(100, activation="relu"),
     # TODO
   ])
 model.compile() #TODO
-trained = model.fit(x_train, y_train, epochs=20, batch_size=10,validation_data=(x_test, y_test))
+trained = model.fit(x_train, y_train, epochs=??, batch_size=??,validation_data=(x_test, y_test))
 print(model.summary())
 
 predicted = model.predict(x_test)
