@@ -20,7 +20,7 @@ x_test = x_test.reshape(-1,28*28)
 y_train = tf.keras.utils.to_categorical(y_train)
 y_test = tf.keras.utils.to_categorical(y_test)
 
-model = tf.keras.models.load_model("data/mnist/mnist.h5")
+model = tf.keras.models.load_model("data/h5/mnist.h5")
 
 predicted = model.predict(x_test)
 
