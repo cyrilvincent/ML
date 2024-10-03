@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-model = tf.keras.models.load_model("data/dogsvscats/cyrilmodel.h5")
+model = tf.keras.models.load_model("data/dogsvscats/cholletmodel.h5")
 img = tf.keras.preprocessing.image.load_img("data/dogsvscats/small/validation/cats/cat.1001.jpg", target_size=(224, 224))
 img = tf.keras.preprocessing.image.img_to_array(img)
 img *= 1. / 255

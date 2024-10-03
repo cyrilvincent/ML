@@ -44,14 +44,14 @@ def train():
     batchSize = 16
 
     trainGenerator = trainset.flow_from_directory(
-            'data/dogsvscats/train',
+            'data/dogsvscats/small/train',
             target_size=(150, 150),
             subset = 'training',
             class_mode="binary",
             batch_size=batchSize)
 
     validationGenerator = trainset.flow_from_directory(
-            'data/dogsvscats/train',
+            'data/dogsvscats/small/train',
             target_size=(150, 150),
             class_mode="binary",
             subset = 'validation',
@@ -63,7 +63,7 @@ def train():
             validation_data=validationGenerator,
     )
 
-    #model.save('data/dogsvscats/cholletmodel.h5')
+    model.save('data/dogsvscats/cholletmodel.h5')
 
     # 25 * 8s 81ms/step - loss: 0.4310 - accuracy: 0.8044 - val_loss: 0.5018 - val_accuracy: 0.7500
 

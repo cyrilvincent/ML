@@ -28,9 +28,9 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(400, activation="relu"),
     tf.keras.layers.Dense(200, activation="relu"),
     tf.keras.layers.Dense(100, activation="relu"),
-    tf.keras.layers.Dense(10, activation=tf.nn.softmax),
+    tf.keras.layers.Dense(10, activation="softmax"),
   ])
-model.compile(loss="categorical_crossentropy", metrics=['accuracy'])
+model.compile(loss="categorical_crossentropy", metrics=['accuracy'], optimizer="rmsprop")
 trained = model.fit(x_train, y_train, epochs=5, batch_size=10,validation_data=(x_test, y_test))
 print(model.summary())
 

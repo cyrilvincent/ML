@@ -10,12 +10,12 @@ def CNNCyril():
         model.add(keras.layers.MaxPooling2D(pool_size=(2, 2)))
         # 112, 112, 32
 
-        model.add(keras.layers.Conv2D(64, (3, 3)))
+        model.add(keras.layers.Conv2D(64, (3, 3)), padding="same")
         model.add(keras.layers.Activation('relu'))
         model.add(keras.layers.MaxPooling2D(pool_size=(2, 2)))
         # 56, 56, 64
 
-        model.add(keras.layers.Conv2D(128, (3, 3)))
+        model.add(keras.layers.Conv2D(128, (3, 3)), padding="same")
         model.add(keras.layers.Activation('relu'))
         model.add(keras.layers.MaxPooling2D(pool_size=(2, 2)))
         # 28, 28, 128
