@@ -17,6 +17,8 @@ model.fit(x, y)
 
 predicted = model.predict(x)
 
+print(model.score(x, y))
+
 plt.scatter(dataframe.surface, dataframe.loyer)
 plt.plot(dataframe.surface, predicted, color="red")
 plt.show()
