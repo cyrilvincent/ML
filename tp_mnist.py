@@ -15,7 +15,7 @@ print(x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 x_train = x_train.reshape(-1, 28*28)
 x_test = x_test.reshape(-1, 28*28)
 
-
+# todo
 predicted = ...
 
 images = x_test.reshape((-1, 28, 28))
