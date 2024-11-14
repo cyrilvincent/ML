@@ -40,8 +40,6 @@ predicted = model.predict(xtest)
 score1 = model.score(xtest, ytest)
 score2 = model.score(xtrain, ytrain)
 
-
-
 print(ok.describe())
 print(ko.describe())
 print(score1, score2)
