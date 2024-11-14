@@ -7,6 +7,7 @@ import sklearn.neighbors as nn
 import sklearn.preprocessing as pp
 import sklearn.ensemble as rf
 import matplotlib.pyplot as plt
+import pickle
 
 
 np.random.seed(42)
@@ -23,7 +24,15 @@ x_test = x_test.reshape(-1, 28*28)
 model = rf.RandomForestClassifier()
 model.fit(x_train, y_train)
 predicted = model.predict(x_test)
-print(model.score(x_test, y_test))
+score = model.score(x_test, y_test)
+print(score)
+
+with open(f"data/mnist/rf-{int(score * 100)}.pickle", "wb") as f:
+    pickle.dump(model, f)
+
+
+
+
 
 features = model.feature_importances_.reshape(28, 28)
 plt.imshow(features)
