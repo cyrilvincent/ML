@@ -5,22 +5,31 @@ import sklearn.model_selection as ms
 import sklearn.metrics as metrics
 import sklearn.neighbors as nn
 import sklearn.preprocessing as pp
+import sklearn.ensemble as rf
+import matplotlib.pyplot as plt
 
 
 np.random.seed(42)
 
 with np.load("data/mnist/mnist.npz", allow_pickle=True) as f:
-    x_train, y_train = f["x_train"], f["y_train"] # 60000
-    x_test, y_test = f["x_test"], f["y_test"] # 10000
+    x_train, y_train = f["x_train"][:], f["y_train"][:] # 60000
+    x_test, y_test = f["x_test"][:], f["y_test"][:] # 10000
 print(x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 
 x_train = x_train.reshape(-1, 28*28)
 x_test = x_test.reshape(-1, 28*28)
 
-model = nn.KNeighborsClassifier(n_neighbors=3)
+# model = nn.KNeighborsClassifier(n_neighbors=3)
+model = rf.RandomForestClassifier()
 model.fit(x_train, y_train)
 predicted = model.predict(x_test)
 print(model.score(x_test, y_test))
+
+features = model.feature_importances_.reshape(28, 28)
+plt.imshow(features)
+plt.show()
+
+
 
 images = x_test.reshape((-1, 28, 28))
 
