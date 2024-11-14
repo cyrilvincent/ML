@@ -4,6 +4,8 @@ import numpy as np
 import sklearn.model_selection as ms
 import sklearn.metrics as metrics
 import sklearn.neighbors as nn
+import sklearn.preprocessing as pp
+
 
 np.random.seed(42)
 
@@ -15,8 +17,10 @@ print(x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 x_train = x_train.reshape(-1, 28*28)
 x_test = x_test.reshape(-1, 28*28)
 
-# todo
-predicted = ...
+model = nn.KNeighborsClassifier(n_neighbors=3)
+model.fit(x_train, y_train)
+predicted = model.predict(x_test)
+print(model.score(x_test, y_test))
 
 images = x_test.reshape((-1, 28, 28))
 
