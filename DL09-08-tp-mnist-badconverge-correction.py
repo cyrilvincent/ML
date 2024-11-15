@@ -10,6 +10,8 @@ x_train = x_train.astype("float32")
 x_test = x_test.astype("float32")
 y_train = y_train.astype("float32")
 y_test = y_test.astype("float32")
+x_train /= 255
+x_test /= 255
 
 x_train = x_train.reshape(-1,28*28)
 x_test = x_test.reshape(-1,28*28)
@@ -19,7 +21,7 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(400, activation="relu"),
     tf.keras.layers.Dense(200, activation="relu"),
     tf.keras.layers.Dense(100, activation="relu"),
-    tf.keras.layers.Dense(1),
+    tf.keras.layers.Dense(10),
   ])
 
 model.compile(loss="mse", metrics=['accuracy'])
