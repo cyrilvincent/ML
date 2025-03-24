@@ -1,5 +1,8 @@
 import pandas as pd
 import sklearn.linear_model as lm
+import numpy as np
+
+
 
 dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 
