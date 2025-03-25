@@ -15,10 +15,16 @@ xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, test_size=0.2, train_si
 # RobustScaler
 # scaler = model
 
-model = n.KNeighborsClassifier(n_neighbors=3)
+scaler = pp.RobustScaler()
+scaler.fit(xtrain)
+xtrain = scaler.transform(xtrain)
+xtest = scaler.transform(xtest)
 
-model.fit(xtrain, ytrain)
-score = model.score(xtest, ytest)
-print(score)
+for k in range(3,15,2):
+    model = n.KNeighborsClassifier(n_neighbors=k)
+
+    model.fit(xtrain, ytrain)
+    score = model.score(xtest, ytest)
+    print(k, score)
 
 
