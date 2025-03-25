@@ -8,6 +8,7 @@ import sklearn.preprocessing as pp
 import sklearn.ensemble as rf
 import matplotlib.pyplot as plt
 import pickle
+import sklearn.ensemble as rf
 
 
 np.random.seed(42)
@@ -20,12 +21,25 @@ print(x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 x_train = x_train.reshape(-1, 28*28)
 x_test = x_test.reshape(-1, 28*28)
 
-for k in range(3,15,2):
-    model = nn.KNeighborsClassifier(n_neighbors=k)
-    model.fit(x_train, y_train)
-    predicted = model.predict(x_test)
-    score = model.score(x_test, y_test)
-    print(k, score)
+# for k in range(3,15,2):
+#     model = nn.KNeighborsClassifier(n_neighbors=k)
+#     model.fit(x_train, y_train)
+#     predicted = model.predict(x_test)
+#     score = model.score(x_test, y_test)
+#     print(k, score)
+model = rf.RandomForestClassifier()
+model.fit(x_train, y_train)
+
+
+
+predicted = model.predict(x_test)
+score = model.score(x_test, y_test)
+print(score)
+
+with open(f"data/breast-cancer/rf-{score:.2f}.pickle", "wb") as f:
+    pickle.dump(model, f)
+
+
 
 images = x_test.reshape((-1, 28, 28))
 

@@ -6,6 +6,7 @@ import sklearn.model_selection as ms
 import sklearn.ensemble as rf
 import matplotlib.pyplot as plt
 import numpy as np
+import pickle
 
 
 
@@ -23,10 +24,15 @@ model = rf.RandomForestClassifier()
 
 model.fit(xtrain, ytrain)
 
+
+
 score = model.score(xtrain, ytrain)
 print(score)
 score = model.score(xtest, ytest)
 print(score)
+
+with open(f"data/heartdisease/rf-{score:0.2f}.pickle", "wb") as f:
+    pickle.dump(model, f)
 
 predicted = model.predict(xtest)
 print(predicted)
