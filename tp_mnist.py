@@ -20,25 +20,12 @@ print(x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 x_train = x_train.reshape(-1, 28*28)
 x_test = x_test.reshape(-1, 28*28)
 
-# model = nn.KNeighborsClassifier(n_neighbors=3)
-model = rf.RandomForestClassifier()
-model.fit(x_train, y_train)
-predicted = model.predict(x_test)
-score = model.score(x_test, y_test)
-print(score)
-
-with open(f"data/mnist/rf-{int(score * 100)}.pickle", "wb") as f:
-    pickle.dump(model, f)
-
-
-
-
-
-features = model.feature_importances_.reshape(28, 28)
-plt.imshow(features)
-plt.show()
-
-
+for k in range(3,15,2):
+    model = nn.KNeighborsClassifier(n_neighbors=k)
+    model.fit(x_train, y_train)
+    predicted = model.predict(x_test)
+    score = model.score(x_test, y_test)
+    print(k, score)
 
 images = x_test.reshape((-1, 28, 28))
 
