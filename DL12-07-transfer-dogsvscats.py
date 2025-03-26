@@ -36,7 +36,7 @@ trainGenerator = trainset.flow_from_directory(
         batch_size=batchSize)
 
 validationGenerator = trainset.flow_from_directory(
-        'data/dogsvscats/train',
+        'data/dogsvscats/validation',
         target_size=(224, 224),
         class_mode="binary",
         subset = 'validation',
