@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 import matplotlib.pyplot as plt
-import cv2 #opencv-python
+import cv2 #pip install opencv-python
 
 num_shapes = 2
 img_shape = (128, 128, 3)
