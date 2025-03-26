@@ -17,12 +17,15 @@ scaler.fit(xtrain)
 xtrain = scaler.transform(xtrain)
 xtest = scaler.transform(xtest)
 
+ytrain = tf.keras.utils.to_categorical(ytrain)
+ytest = tf.keras.utils.to_categorical(ytest)
+
 model = tf.keras.Sequential([
     tf.keras.layers.Dense(30, activation=tf.nn.relu,
                        input_shape=(x.shape[1],)),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(1, activation=tf.nn.sigmoid)
+    tf.keras.layers.Dense(2, activation=tf.nn.softmax)
   ])
 
 # 570 data => 2 à 3 layers
@@ -30,12 +33,14 @@ model = tf.keras.Sequential([
 # 1 résultat
 # Tester en V, avec 1 layer, avec 5 layers, 10, 20
 
-model.compile(loss="cmse", optimizer="rmsprop",metrics=['accuracy'])
+model.compile(loss="categorical_crossentropy", optimizer="rmsprop",metrics=['accuracy'])
 model.summary()
 
-hist = model.fit(x, y, epochs=100, batch_size=1, validation_split=0.2)
-eval = model.evaluate(x, y)
+hist = model.fit(xtrain, ytrain, epochs=100, batch_size=1, validation_split=0.2)
+eval = model.evaluate(xtest, ytest)
+predicted = model.predict(xtest)
 print(eval)
+print(predicted[0])
 
 import matplotlib.pyplot as plt
 f, ax = plt.subplots()
