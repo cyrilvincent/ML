@@ -17,8 +17,18 @@ x_test = x_test.reshape(-1,28*28)
 # x_train = (60000, 784)
 # x_test = 10000
 
-model = None # TODO
-predicted = None #TODO
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(600, input_shape=(x_train.shape[1],)),
+    tf.keras.layers.Dense(400, activation="relu"),
+    tf.keras.layers.Dense(200, activation="relu"),
+    tf.keras.layers.Dense(100, activation="relu"),
+    tf.keras.layers.Dense(1),
+  ])
+
+model.compile(loss="mse", metrics=['accuracy'])
+model.summary()
+trained = model.fit(x_train, y_train, epochs=10, batch_size=1, validation_split=0.2)
+predicted = model.predict(x_test)
 
 import matplotlib.pyplot as plt
 # Gestion des erreurs
