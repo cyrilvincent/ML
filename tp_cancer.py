@@ -5,6 +5,8 @@ import sklearn.model_selection as ms
 import sklearn.preprocessing as pp
 import sklearn.ensemble as rf
 import matplotlib.pyplot as plt
+import pickle
+import sklearn.neural_network as nn
 
 dataframe = pd.read_csv("data/breast-cancer/data.csv", index_col="id")
 y = dataframe.diagnosis
@@ -30,19 +32,22 @@ xtest = scaler.transform(xtest)
 #     score = model.score(xtest, ytest)
 #     print(k, score)
 
-model = rf.RandomForestClassifier()
+# model = rf.RandomForestClassifier()
+model =nn.MLPClassifier(hidden_layer_sizes=(30,30,30))
 model.fit(xtrain, ytrain)
 score = model.score(xtest, ytest)
 print(score)
-
-from sklearn.tree import export_graphviz
-
-export_graphviz(model.estimators_[0], out_file="data/breast-cancer/tree.dot", feature_names=x.columns, class_names=["0", "1"])
-
-print(model.feature_importances_)
-
-plt.bar(x.columns, model.feature_importances_)
-plt.xticks(rotation=45)
-plt.show()
+# with open(f"data/breast-cancer/rf-{score:.2f}.pickle", "wb") as f:
+#     pickle.dump((model, scaler), f)
+#
+# from sklearn.tree import export_graphviz
+#
+# export_graphviz(model.estimators_[0], out_file="data/breast-cancer/tree.dot", feature_names=x.columns, class_names=["0", "1"])
+#
+# print(model.feature_importances_)
+#
+# plt.bar(x.columns, model.feature_importances_)
+# plt.xticks(rotation=45)
+# plt.show()
 
 

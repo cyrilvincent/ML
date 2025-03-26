@@ -11,6 +11,8 @@ import pickle
 import sklearn.ensemble as rf
 
 
+
+
 np.random.seed(42)
 
 with np.load("data/mnist/mnist.npz", allow_pickle=True) as f:
@@ -30,13 +32,15 @@ x_test = x_test.reshape(-1, 28*28)
 model = rf.RandomForestClassifier()
 model.fit(x_train, y_train)
 
-
-
 predicted = model.predict(x_test)
 score = model.score(x_test, y_test)
 print(score)
 
-with open(f"data/breast-cancer/rf-{score:.2f}.pickle", "wb") as f:
+features = model.feature_importances_.reshape(28,28)
+plt.imshow(features)
+plt.show()
+
+with open(f"data/mnist/rf-{score:.2f}.pickle", "wb") as f:
     pickle.dump(model, f)
 
 
