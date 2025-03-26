@@ -13,20 +13,6 @@ model = tf.keras.Sequential([
                        input_shape=(x.shape[1],)),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-
-
     tf.keras.layers.Dense(1)
   ])
 
@@ -38,7 +24,7 @@ model = tf.keras.Sequential([
 model.compile(loss="mse", optimizer="rmsprop",metrics=['accuracy'])
 model.summary()
 
-hist = model.fit(x, y, epochs=10, batch_size=1)
+hist = model.fit(x, y, epochs=10, batch_size=1, validation_split=0.2)
 eval = model.evaluate(x, y)
 print(eval)
 
