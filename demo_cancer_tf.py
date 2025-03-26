@@ -1,5 +1,7 @@
 import tensorflow as tf
 import pandas
+import sklearn.model_selection as ms
+import sklearn.preprocessing as pp
 
 
 tf.random.set_seed(1)
@@ -8,12 +10,19 @@ dataframe = pandas.read_csv("data/breast-cancer/data.csv", index_col="id")
 y = dataframe.diagnosis
 x = dataframe.drop(["diagnosis"], axis=1)
 
+xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, test_size=0.2, train_size=0.8)
+
+scaler = pp.RobustScaler()
+scaler.fit(xtrain)
+xtrain = scaler.transform(xtrain)
+xtest = scaler.transform(xtest)
+
 model = tf.keras.Sequential([
     tf.keras.layers.Dense(30, activation=tf.nn.relu,
                        input_shape=(x.shape[1],)),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(1)
+    tf.keras.layers.Dense(1, activation=tf.nn.sigmoid)
   ])
 
 # 570 data => 2 à 3 layers
@@ -21,10 +30,10 @@ model = tf.keras.Sequential([
 # 1 résultat
 # Tester en V, avec 1 layer, avec 5 layers, 10, 20
 
-model.compile(loss="mse", optimizer="rmsprop",metrics=['accuracy'])
+model.compile(loss="binary_crossentropy", optimizer="rmsprop",metrics=['accuracy'])
 model.summary()
 
-hist = model.fit(x, y, epochs=10, batch_size=1, validation_split=0.2)
+hist = model.fit(x, y, epochs=100, batch_size=1, validation_split=0.2)
 eval = model.evaluate(x, y)
 print(eval)
 
