@@ -1,5 +1,5 @@
 import tensorflow as tf
-
+import sklearn.preprocessing as pp
 import numpy as np
 
 with np.load("data/mnist/mnist.npz", allow_pickle=True) as f:
@@ -10,6 +10,11 @@ x_train = x_train.astype("float32")
 x_test = x_test.astype("float32")
 y_train = y_train.astype("float32")
 y_test = y_test.astype("float32")
+
+scaler = pp.RobustScaler()
+scaler.fit(x_train)
+xtrain = scaler.transform(x_train)
+xtest = scaler.transform(x_test)
 
 x_train = x_train.reshape(-1,28*28)
 x_test = x_test.reshape(-1,28*28)
