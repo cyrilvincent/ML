@@ -24,6 +24,7 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(30, activation=tf.nn.relu,
                        input_shape=(x.shape[1],)),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
+    tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
     tf.keras.layers.Dense(2, activation=tf.nn.softmax)
   ])
@@ -37,9 +38,11 @@ model.compile(loss="categorical_crossentropy", optimizer="rmsprop",metrics=['acc
 model.summary()
 
 hist = model.fit(xtrain, ytrain, epochs=100, batch_size=1, validation_split=0.2)
+
 eval = model.evaluate(xtest, ytest)
 predicted = model.predict(xtest)
 print(eval)
+model.save(f"data/breast-cancer/mlp-{int(eval[1]*100)}.h5")
 print(predicted[0])
 
 import matplotlib.pyplot as plt
