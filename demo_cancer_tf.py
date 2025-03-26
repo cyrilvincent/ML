@@ -30,7 +30,7 @@ model = tf.keras.Sequential([
 # 1 résultat
 # Tester en V, avec 1 layer, avec 5 layers, 10, 20
 
-model.compile(loss="binary_crossentropy", optimizer="rmsprop",metrics=['accuracy'])
+model.compile(loss="cmse", optimizer="rmsprop",metrics=['accuracy'])
 model.summary()
 
 hist = model.fit(x, y, epochs=100, batch_size=1, validation_split=0.2)
