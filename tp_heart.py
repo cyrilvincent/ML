@@ -5,6 +5,7 @@ import numpy as np
 import sklearn.ensemble as rf
 from sklearn.tree import export_graphviz
 import matplotlib.pyplot as plt
+import pickle
 
 pd.set_option('display.max_columns', None)
 dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
@@ -23,7 +24,13 @@ x = dataframe.drop("num", axis=1)
 
 model = rf.RandomForestClassifier()
 model.fit(x, y)
-print(model.score(x, y))
+score = model.score(x, y)
+print(score)
+
+with open(f"data/heartdisease/rf-{int(score*100)}.pickle", "wb") as f:
+    pickle.dump(model, f)
+
+
 
 export_graphviz(model.estimators_[0], out_file="data/heartdisease/tree.dot", feature_names=x.columns, class_names=["0", "1"])
 
