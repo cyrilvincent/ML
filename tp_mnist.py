@@ -14,6 +14,7 @@ xtest = xtest.reshape(-1, 28*28)
 
 
 # TODO
+# TODO
 
 
 xtest = xtest.reshape(-1, 28, 28)
