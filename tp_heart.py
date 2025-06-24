@@ -6,6 +6,7 @@ import sklearn.ensemble as rf
 from sklearn.tree import export_graphviz
 import matplotlib.pyplot as plt
 import pickle
+import sklearn.preprocessing as pp
 
 pd.set_option('display.max_columns', None)
 dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
@@ -14,6 +15,10 @@ print(dataframe.describe())
 
 y = dataframe.num
 x = dataframe.drop("num", axis=1)
+
+scaler = pp.RobustScaler()
+scaler.fit(x)
+xnorm = scaler.transform(x)
 
 # np.random.seed(42)
 # # model = lm.LinearRegression()
@@ -28,7 +33,7 @@ score = model.score(x, y)
 print(score)
 
 with open(f"data/heartdisease/rf-{int(score*100)}.pickle", "wb") as f:
-    pickle.dump(model, f)
+    pickle.dump((model,scaler), f)
 
 
 
