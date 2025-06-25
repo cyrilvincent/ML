@@ -7,6 +7,7 @@ from sklearn.tree import export_graphviz
 import matplotlib.pyplot as plt
 import pickle
 import sklearn.preprocessing as pp
+import sklearn.svm as svm
 
 pd.set_option('display.max_columns', None)
 dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")

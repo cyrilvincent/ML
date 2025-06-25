@@ -9,15 +9,7 @@ y = dataframe.diagnosis
 x = dataframe.drop(["diagnosis"], axis=1)
 
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(30, activation=tf.nn.relu,
-                       input_shape=(x.shape[1],)),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(30, activation=tf.nn.relu),
+    tf.keras.layers.Dense(30, activation=tf.nn.relu, input_shape=(x.shape[1],)),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
     tf.keras.layers.Dense(1)
@@ -28,10 +20,10 @@ model = tf.keras.Sequential([
 # 1 résultat
 # Tester en V, avec 1 layer, avec 5 layers, 10, 20
 
-model.compile(loss="mse", optimizer="rmsprop",metrics=['accuracy'])
+model.compile(loss="mse", optimizer="rmsprop", metrics=['accuracy'])
 model.summary()
 
-hist = model.fit(x, y, epochs=10, batch_size=1)
+hist = model.fit(x, y, epochs=50, batch_size=1)
 eval = model.evaluate(x, y)
 print(eval)
 
