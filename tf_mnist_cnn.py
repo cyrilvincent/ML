@@ -31,7 +31,7 @@ model.add(tf.keras.layers.Activation('relu'))
 model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2))) # 5,5,16
 
 #Dense
-model.add(tf.keras.layers.Flatten()) # 400
+model.add(tf.keras.layers.Flatten()) # 160
 model.add(tf.keras.layers.Dense(128))
 model.add(tf.keras.layers.Activation('relu'))
 model.add(tf.keras.layers.Dropout(0.5))

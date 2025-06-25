@@ -16,6 +16,7 @@ import tensorflow.keras as keras
 model = keras.models.load_model("data/dogsvscats/cyrilmodel.h5")
 model.summary()
 
+model.compile(optimizer="sgd")
 history = model.fit(x, y, epochs=200, batch_size=10, validation_split=0.2)
 eval = model.evaluate(x, y)
 print(eval)

@@ -31,7 +31,7 @@ model = tf.keras.Sequential([
 model.compile(loss="binary_crossentropy", optimizer="rmsprop", metrics=['accuracy'])
 model.summary()
 
-hist = model.fit(xtrain, ytrain, epochs=50, batch_size=1, validation_split=0.2)
+hist = model.fit(xtrain, ytrain, epochs=50, batch_size=1, validation_data=(xtest, ytest))
 eval = model.evaluate(xtest, ytest)
 print(eval)
 ypredict = model.predict(xtest)

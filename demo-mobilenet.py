@@ -11,7 +11,7 @@ model.summary()
 
 
 # load an image from file
-image = load_img('data/img/mug.jpg', target_size=(224, 224))
+image = load_img('data/img/ski.jpg', target_size=(224, 224))
 # convert the image pixels to a numpy array
 image = img_to_array(image)
 # reshape data for the model : (nbsample, length, width, colordepth)
