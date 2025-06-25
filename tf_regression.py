@@ -7,7 +7,7 @@ import tensorflow as tf
 
 np.random.seed(0)
 tf.random.set_seed(0)
-noise = 1
+noise = 10
 def f(x):
     delta = (np.random.rand(x.shape[0]) - 0.5) * noise
     # f(x) = 2.5x.sin(0.7x)+2
