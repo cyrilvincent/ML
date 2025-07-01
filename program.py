@@ -3,4 +3,7 @@
 # result = demo_function.add(2,3)
 
 from demo_function import add
-result = add(2, 3)
+from tp_function import factorielle, is_prime
+
+print(factorielle(5))
+print(is_prime(7))
