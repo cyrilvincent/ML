@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn.linear_model as lm
+import sklearn.preprocessing as pp
+import sklearn.pipeline as pipe
 
 dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 # y = dataframe["num"]
@@ -32,7 +34,8 @@ print(f"Dataframe age mean: {np.mean(dataframe.age)}, std: {np.std(dataframe.age
 y = dataframe["num"]
 x = dataframe.drop("num", axis=1)
 
-model = lm.LinearRegression()
+# model = lm.LinearRegression()
+model = pipe.make_pipeline(pp.PolynomialFeatures(1), lm.Ridge())
 model.fit(x, y)
 ypredicted = model.predict(x)
 print(model.score(x, y))
