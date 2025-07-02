@@ -37,8 +37,16 @@ a4 = np.array([55,4,99,88,77,6,14,28,55,54])
 print(a3, a3[a4 < 50])
 print(a4, a4[a4 < 50])
 print(a4 < 50)
-a5 = a4[a4 < 50]
+a4 = a4[a4 < 50]
+filter = (a4 < 50)
+# print(a3[filter])
+# print(a4[filter])
 
 # Créer un tableau de 100 entiers
 # Filtrer les entiers multiple de 3 et < 50
 # Récupérer le résultat et monter au carré et appliquer un sinus
+a100 = np.arange(100)
+filter = ((a100 % 3 == 0) & (a100 < 50))
+result = a100[filter]
+print(result)
+print(np.sin(np.pow(result, 2)))
