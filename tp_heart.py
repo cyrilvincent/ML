@@ -29,9 +29,9 @@ print(f"Dataframe age mean: {np.mean(dataframe.age)}, std: {np.std(dataframe.age
 # idem sur sex et age
 
 y = dataframe["num"]
-x = dataframe.drop("num", 1)
+x = dataframe.drop("num", axis=1)
 
-# Créer le modèle
+# Créer le modèle à partir du dataframe
 # fit
 # predict
 # score : conclusion
