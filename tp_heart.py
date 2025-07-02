@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import sklearn.linear_model as lm
 
 dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 # y = dataframe["num"]
@@ -31,6 +32,10 @@ print(f"Dataframe age mean: {np.mean(dataframe.age)}, std: {np.std(dataframe.age
 y = dataframe["num"]
 x = dataframe.drop("num", axis=1)
 
+model = lm.LinearRegression()
+model.fit(x, y)
+ypredicted = model.predict(x)
+print(model.score(x, y))
 # Créer le modèle à partir du dataframe
 # fit
 # predict
