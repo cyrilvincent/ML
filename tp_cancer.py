@@ -7,6 +7,7 @@ import sklearn.neighbors as nn
 import sklearn.ensemble as rf
 from sklearn.tree import export_graphviz
 import matplotlib.pyplot as plt
+import sklearn.neural_network as neural
 import pickle
 
 # Charger data/breast-cancer/data.csv dans un dataset
@@ -35,24 +36,25 @@ xtrain = scaler.transform(xtrain)
 xtest = scaler.transform(xtest)
 
 # model = nn.KNeighborsClassifier(n_neighbors=3)
-model = rf.RandomForestClassifier()
+# model = rf.RandomForestClassifier()
+model = neural.MLPClassifier(hidden_layer_sizes=(50,50,50,50,50))
 model.fit(xtrain, ytrain)
 ypredicted = model.predict(xtest)
 
-with open("data/breast-cancer/rf.pickle", "wb") as f:
+with open("data/breast-cancer/mlp.pickle", "wb") as f:
     pickle.dump(model, f)
 
 score = model.score(xtest, ytest)
 print(f"Score: {score:.2f}")
 
-export_graphviz(model.estimators_[0], out_file="data/breast-cancer/tree.dot", feature_names=x.columns, class_names=["0", "1"])
-
-# TP idem pour mnist sauf les feature_importances
-
-print(model.feature_importances_)
-plt.bar(x.columns, model.feature_importances_)
-plt.xticks(rotation=45)
-plt.show()
+# export_graphviz(model.estimators_[0], out_file="data/breast-cancer/tree.dot", feature_names=x.columns, class_names=["0", "1"])
+#
+# # TP idem pour mnist sauf les feature_importances
+#
+# print(model.feature_importances_)
+# plt.bar(x.columns, model.feature_importances_)
+# plt.xticks(rotation=45)
+# plt.show()
 
 
 
