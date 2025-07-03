@@ -2,6 +2,7 @@ import numpy as np
 import sklearn.neighbors as nn
 import matplotlib.pyplot as plt
 import sklearn.ensemble as rf
+from sklearn.tree import export_graphviz
 
 np.random.seed(42)
 
@@ -13,19 +14,23 @@ print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape)
 xtrain = xtrain.reshape(-1, 28*28) # 764
 xtest = xtest.reshape(-1, 28*28)
 
-for k in range(3,12):
-    model = nn.KNeighborsClassifier(n_neighbors=k)
-    model.fit(xtrain, ytrain)
-    ypredicted = model.predict(xtest)
-    score = model.score(xtest, ytest)
-    print(f"K={k} Score: {score:.3f}")
+# for k in range(3,12):
+#     model = nn.KNeighborsClassifier(n_neighbors=k)
+#     model.fit(xtrain, ytrain)
+#     ypredicted = model.predict(xtest)
+#     score = model.score(xtest, ytest)
+#     print(f"K={k} Score: {score:.3f}")
+model = rf.RandomForestClassifier()
+model.fit(xtrain, ytrain)
+ypredicted = model.predict(xtest)
+score = model.score(xtest, ytest)
+print(f"Score: {score:.3f}")
 
-# KNN
-# FIT
-# PREDICT => ypredicted
-# SCORE
-# Décommenter mon code
-# Trouver la meilleur valeur de k
+export_graphviz(model.estimators_[0], out_file="data/mnist/tree.dot", class_names=["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
+
+matrix = model.feature_importances_.reshape(28, 28)
+plt.matshow(matrix)
+plt.show()
 
 xtest = xtest.reshape(-1, 28, 28)
 select = np.random.randint(xtest.shape[0], size=12)
