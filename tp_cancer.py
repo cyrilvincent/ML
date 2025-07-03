@@ -7,6 +7,7 @@ import sklearn.neighbors as nn
 import sklearn.ensemble as rf
 from sklearn.tree import export_graphviz
 import matplotlib.pyplot as plt
+import pickle
 
 # Charger data/breast-cancer/data.csv dans un dataset
 # Faire un describe sur la colonne perimeter_worst
@@ -37,6 +38,10 @@ xtest = scaler.transform(xtest)
 model = rf.RandomForestClassifier()
 model.fit(xtrain, ytrain)
 ypredicted = model.predict(xtest)
+
+with open("data/breast-cancer/rf.pickle", "wb") as f:
+    pickle.dump(model, f)
+
 score = model.score(xtest, ytest)
 print(f"Score: {score:.2f}")
 
