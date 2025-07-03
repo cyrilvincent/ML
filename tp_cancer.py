@@ -21,9 +21,16 @@ x = dataframe.drop(["diagnosis", "id"], axis=1)
 # train_test_split
 
 scaler = pp.StandardScaler()
-scaler.fit(x, y)
+scaler.fit(x)
 xnorm = scaler.transform(x)
 print(xnorm)
+
+# TODO
+# train_test_split
+# normalisé x
+# knn
+# predict
+# score
 
 
 
