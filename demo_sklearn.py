@@ -12,7 +12,7 @@ x = dataframe["surface"].values.reshape(-1, 1)
 print(dataframe.shape)
 
 # model = lm.LinearRegression()
-model = pipe.make_pipeline(pp.PolynomialFeatures(2), lm.Ridge())
+model = pipe.make_pipeline(pp.PolynomialFeatures(500), lm.Ridge())
 model.fit(x, y)
 
 xtest = np.arange(180).reshape(-1, 1)

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import sklearn.linear_model as lm
 import sklearn.preprocessing as pp
 import sklearn.pipeline as pipe
+import sklearn.model_selection as ms
 
 dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 # y = dataframe["num"]
@@ -34,11 +35,13 @@ print(f"Dataframe age mean: {np.mean(dataframe.age)}, std: {np.std(dataframe.age
 y = dataframe["num"]
 x = dataframe.drop("num", axis=1)
 
+xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
+
 # model = lm.LinearRegression()
-model = pipe.make_pipeline(pp.PolynomialFeatures(1), lm.Ridge())
-model.fit(x, y)
-ypredicted = model.predict(x)
-print(model.score(x, y))
+model = pipe.make_pipeline(pp.PolynomialFeatures(2), lm.Ridge())
+model.fit(xtrain, ytrain)
+ypredicted = model.predict(xtest)
+print(model.score(xtest, ytest))
 # Créer le modèle à partir du dataframe
 # fit
 # predict
