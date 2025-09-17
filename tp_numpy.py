@@ -42,6 +42,8 @@ print(v2.shape)
 print(mat12)
 print(mat21)
 
+# Afficher dans matplotlib le nuage de point des x = surfaces, y = loyers
+
 
 
 
