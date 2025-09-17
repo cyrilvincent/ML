@@ -19,7 +19,7 @@ print(v6)
 v7 = np.linspace(0,10,101)
 print(v7)
 
-print(np.random.seed(42))
+# print(np.random.seed(42))
 rnd = np.random.rand(10)
 print(rnd)
 rnd2 = np.random.randint(0,10000000,5)
@@ -39,6 +39,14 @@ print(np.sum(v1))
 # print(v1 + v4)
 
 print(v1.ndim, v1.size, v1.shape)
-
-
 print(rnd)
+
+v1 = np.arange(100)
+v2 = v1[(v1 % 2 != 0) & (v1 < 50)]
+print(v2)
+
+rnd = np.random.rand(100000)
+print("Mean:", np.mean(rnd))
+print("Median:", np.median(rnd))
+print("Std:", np.std(rnd))
+print("Quantile:", np.quantile(rnd, [0.25, 0.75]))
