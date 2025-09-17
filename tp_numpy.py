@@ -17,9 +17,31 @@ tableau_log10 = np.log10(loyers)
 print(tableau_log10)
 print("max:", np.max(loyers), "min:", np.min(loyers))
 
+print(np.mean(loyers), np.std(loyers), np.median(loyers), np.quantile(loyers, [0.25, 0.75]))
+print(np.mean(surfaces), np.std(surfaces), np.median(surfaces), np.quantile(surfaces, [0.25, 0.75]))
+print(loyers[loyers < 1000])
+print(loyers[surfaces > 100])
+print(loyers[(surfaces > 100) & (loyers < 2500) ])
 # Stats sur les loyers et surfaces
 # Filtrer les loyers < 1000
 # Afficher les loyers dont les surfaces > 100
-# Afficher les loyers dont les surfaces > 100 & loyers > 1000
+# Afficher les loyers dont les surfaces > 100 & loyers < 3000
+
+mat22 = np.array([[1,2],[3,4]])
+print(mat22)
+# print(np.sum(mat22))
+print(np.sum(mat22, axis=0)) # NP ROW FIRST
+print(np.sum(mat22, axis=1)) # COLUMN
+
+mat12 = np.array([[1,2]])
+mat21 = np.array([[1],[2]])
+print(mat12.shape)
+print(mat21.shape)
+v2 = np.array([1,2])
+print(v2.shape)
+print(mat12)
+print(mat21)
+
+
 
 
