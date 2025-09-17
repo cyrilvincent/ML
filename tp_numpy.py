@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Copier depuis le zip de ce matin le répertoire data/* à la racine de votre projet
 data = np.load("data/house/house_filtre.npz")
@@ -44,6 +45,7 @@ print(mat21)
 
 # Afficher dans matplotlib le nuage de point des x = surfaces, y = loyers
 
-
+plt.scatter(surfaces, loyers)
+plt.show()
 
 
