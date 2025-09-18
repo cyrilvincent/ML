@@ -29,6 +29,7 @@ print(loyers[(surfaces > 100) & (loyers < 2500) ])
 # Afficher les loyers dont les surfaces > 100 & loyers < 3000
 
 mat22 = np.array([[1,2],[3,4]])
+mat22[0,1]
 print(mat22)
 # print(np.sum(mat22))
 print(np.sum(mat22, axis=0)) # NP ROW FIRST
@@ -47,5 +48,11 @@ print(mat21)
 
 plt.scatter(surfaces, loyers)
 plt.show()
+
+for loyer in loyers:
+    print(loyer)
+
+for i in range(len(loyers)):
+    print(loyers[i])
 
 
