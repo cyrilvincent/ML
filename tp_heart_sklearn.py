@@ -8,11 +8,11 @@ import matplotlib.pyplot as plt
 print(sklearn.__version__)
 
 # 1 Pandas DataMart
-dataframe = pd.read_csv("data/house/house.csv")
+dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 
 # Déterminer x et y
-y = dataframe["loyer"]
-x = dataframe["surface"].values.reshape(-1, 1)
+y = dataframe["num"]
+x = dataframe.drop("num", axis=1)
 
 # 3 Model
 # model = lm.LinearRegression()
@@ -30,13 +30,6 @@ model.fit(x, y)
 score = model.score(x, y)
 print("Score", score)
 
-# 6 Predict
-xnew = np.arange(400).reshape(-1, 1)
-ypredicted = model.predict(xnew)
 
-# 7 Dataviz
-plt.scatter(dataframe["surface"], dataframe["loyer"])
-plt.plot(xnew, ypredicted, color="red")
 
-plt.show()
 
