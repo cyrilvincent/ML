@@ -22,6 +22,11 @@ print(dataframe["ca"].isnull().sum() / 294)
 print(dataframe.isnull().sum())
 dataframe = dataframe.drop(["slope", "thal", "ca"], axis=1)
 
+l = []
+for col in dataframe.columns:
+    l.append(col)
+print(l)
+
 dataframe = dataframe.fillna({"chol": np.round(mean_chol + (np.random.rand() - 0.5) * std_chol, 0)})
 dataframe = dataframe.dropna()
 print(dataframe.isnull().sum())
