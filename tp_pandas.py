@@ -17,6 +17,14 @@ dataframe["loyer_m2"] = dataframe["loyer"] / dataframe["surface"]
 dataframe.to_html("data/house/house.html", index=False)
 
 dataframe = dataframe[dataframe["surface"] < 200]
+
+
+loyer_mean = np.mean(dataframe["loyer"])
+loyer_std = np.std(dataframe["loyer"])
+
+print("Mean", loyer_mean,"Std",loyer_std, "Mean+3*Std", loyer_mean + 3 * loyer_std)
+dataframe = dataframe[dataframe["loyer"] < loyer_mean + 3 * loyer_std]
+
 plt.scatter(dataframe["surface"], dataframe["loyer"])
 
 print(dataframe.dtypes)
