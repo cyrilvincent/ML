@@ -14,13 +14,20 @@ print(v2 / 2)
 
 dataframe = pd.read_csv("data/heartdisease/data_with_nan.csv", na_values=["", "."])
 print(dataframe)
-print(dataframe["chol"].values.mean())
+mean_chol = dataframe["chol"].mean()
+std_chol = dataframe["chol"].std()
 # dataframe.chol == dataframe["chol"]
 print(dataframe["ca"].isnull().sum() / 294)
-dataframe = dataframe.drop(["ca"], axis=1)
 
-print(dataframe["chol"].isnull().sum() / 294)
 print(dataframe.isnull().sum())
+dataframe = dataframe.drop(["slope", "thal", "ca"], axis=1)
+
+dataframe = dataframe.fillna({"chol": np.round(mean_chol + (np.random.rand() - 0.5) * std_chol, 0)})
+dataframe = dataframe.dropna()
+print(dataframe.isnull().sum())
+
+dataframe.to_csv("data/heartdisease/dataclean.csv")
+
 dataframe["chol"].hist()
 plt.show()
 
