@@ -22,6 +22,12 @@ dataframe = pd.read_csv("data/breast-cancer/data.csv")
 y = dataframe["diagnosis"]
 x = dataframe.drop(["diagnosis", "id"], axis=1)
 
+scaler = pp.RobustScaler() # Calcul median, les quartiles
+scaler.fit(x) # (x - median) / (if x < median => 1/4tile sinon max - 3/4ile)
+x=scaler.transform(x)
+
+# x,y = scaler.fit_transform(x, y)
+
 # 3 Model
 # model = lm.LinearRegression()
 # f(x) = ax + b; a = slope; b = intersection pour x=0;

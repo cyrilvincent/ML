@@ -23,8 +23,7 @@ x = dataframe.drop("num", axis=1)
 # x = scaler.transform(x) # Applique la formule (x - mean) / std
 scaler = pp.RobustScaler() # Calcul median, les quartiles
 scaler.fit(x) # (x - median) / (if x < median => 1/4tile sinon max - 3/4ile)
-x= scaler.transform(x)
-
+x=scaler.transform(x)
 
 
 # 3 Model
