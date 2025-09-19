@@ -15,6 +15,18 @@ dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 y = dataframe["num"]
 x = dataframe.drop("num", axis=1)
 
+# 2 Scaler
+# pp.MinMaxScaler() => Scaler entre 0 & 1, Max=1, Min=0
+# scaler = pp.StandardScaler()  # Moyenne centrée réduite, moyenne=0, std=1
+# # Pour chaque valeur on fait (x - mean) / std
+# scaler.fit(x) # Calcul la mean et la std pour chaque colonne
+# x = scaler.transform(x) # Applique la formule (x - mean) / std
+scaler = pp.RobustScaler() # Calcul median, les quartiles
+scaler.fit(x) # (x - median) / (if x < median => 1/4tile sinon max - 3/4ile)
+x= scaler.transform(x)
+
+
+
 # 3 Model
 # model = lm.LinearRegression()
 # f(x) = ax + b; a = slope; b = intersection pour x=0;

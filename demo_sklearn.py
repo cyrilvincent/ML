@@ -14,6 +14,9 @@ dataframe = pd.read_csv("data/house/house.csv")
 y = dataframe["loyer"]
 x = dataframe["surface"].values.reshape(-1, 1)
 
+# 2 Normalisation : Scaling
+# Scaler
+
 # 3 Model
 # model = lm.LinearRegression()
 # f(x) = ax + b; a = slope; b = intersection pour x=0;

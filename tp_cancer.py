@@ -12,6 +12,7 @@ import sklearn.preprocessing as pp
 import sklearn.pipeline as pipe
 import pandas as pd
 import matplotlib.pyplot as plt
+import sklearn.neighbors as nb
 print(sklearn.__version__)
 
 # 1 Pandas DataMart
@@ -27,8 +28,9 @@ x = dataframe.drop(["diagnosis", "id"], axis=1)
 # a et b soit les monômes du polynôme de dégré 1; a et b sont des poids
 # for degree in range(2,5):
 degree = 2
-model = pipe.make_pipeline(pp.PolynomialFeatures(degree), lm.Ridge())
+# model = pipe.make_pipeline(pp.PolynomialFeatures(degree), lm.Ridge())
 # f(x) = ax² + bx + c
+model = nb.KNeighborsClassifier(n_neighbors=3)
 
 # 4 Apprentissage supervisé car y est connu
 model.fit(x, y)
@@ -37,6 +39,7 @@ model.fit(x, y)
 score = model.score(x, y)
 print("Score", score)
 
+# (x-mean)/std
 
 
 
