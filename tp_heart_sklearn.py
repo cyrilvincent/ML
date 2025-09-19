@@ -5,6 +5,7 @@ import sklearn.preprocessing as pp
 import sklearn.pipeline as pipe
 import pandas as pd
 import matplotlib.pyplot as plt
+import sklearn.model_selection as ms
 import sklearn.neighbors as nb
 print(sklearn.__version__)
 
@@ -25,6 +26,10 @@ scaler = pp.RobustScaler() # Calcul median, les quartiles
 scaler.fit(x) # (x - median) / (if x < median => 1/4tile sinon max - 3/4ile)
 x=scaler.transform(x)
 
+# 2.5 Train Test Split
+np.random.seed(42)
+xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
+# REGLE D'OR = il est interdit de s'entrainer sur le jeux de test
 
 # 3 Model
 # model = lm.LinearRegression()
@@ -39,11 +44,12 @@ for k in range(1,10):
     model = nb.KNeighborsClassifier(n_neighbors=k)
 
     # 4 Apprentissage supervisé car y est connu
-    model.fit(x, y)
+    model.fit(xtrain, ytrain)
 
     # 5 Score
-    score = model.score(x, y)
-    print("Score", k, score)
+    train_score = model.score(xtrain, ytrain)
+    test_score = model.score(xtest, ytest)
+    print("Score", k, train_score, test_score)
 
 
 
