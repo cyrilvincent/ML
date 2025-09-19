@@ -13,6 +13,7 @@ import sklearn.pipeline as pipe
 import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn.neighbors as nb
+import sklearn.model_selection as ms
 print(sklearn.__version__)
 
 # 1 Pandas DataMart
@@ -25,6 +26,9 @@ x = dataframe.drop(["diagnosis", "id"], axis=1)
 scaler = pp.RobustScaler() # Calcul median, les quartiles
 scaler.fit(x) # (x - median) / (if x < median => 1/4tile sinon max - 3/4ile)
 x=scaler.transform(x)
+
+np.random.seed(42)
+xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
 
 # x,y = scaler.fit_transform(x, y)
 
@@ -39,11 +43,12 @@ degree = 2
 model = nb.KNeighborsClassifier(n_neighbors=3)
 
 # 4 Apprentissage supervisé car y est connu
-model.fit(x, y)
+model.fit(xtrain, ytrain)
 
 # 5 Score
-score = model.score(x, y)
-print("Score", score)
+train_score = model.score(xtrain, ytrain)
+test_score = model.score(xtest, ytest)
+print("Score", train_score, test_score)
 
 # (x-mean)/std
 

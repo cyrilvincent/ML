@@ -7,6 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn.model_selection as ms
 import sklearn.neighbors as nb
+import sklearn.ensemble as rf
 print(sklearn.__version__)
 
 # 1 Pandas DataMart
@@ -15,6 +16,7 @@ dataframe = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 # Déterminer x et y
 y = dataframe["num"]
 x = dataframe.drop("num", axis=1)
+xoriginal = x
 
 # 2 Scaler
 # pp.MinMaxScaler() => Scaler entre 0 & 1, Max=1, Min=0
@@ -40,17 +42,26 @@ xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_si
 # model = pipe.make_pipeline(pp.PolynomialFeatures(degree), lm.Ridge())
 # f(x) = ax² + bx + c
 
-for k in range(1,10):
-    model = nb.KNeighborsClassifier(n_neighbors=k)
+# for k in range(1,10):
+#     model = nb.KNeighborsClassifier(n_neighbors=k)
+#
+#     # 4 Apprentissage supervisé car y est connu
+#     model.fit(xtrain, ytrain)
+#
+#     # 5 Score
+#     train_score = model.score(xtrain, ytrain)
+#     test_score = model.score(xtest, ytest)
+#     print("Score", k, train_score, test_score)
+model = rf.RandomForestClassifier(max_depth=4)
+model.fit(xtrain, ytrain)
+train_score = model.score(xtrain, ytrain)
+test_score = model.score(xtest, ytest)
+print("Score", train_score, test_score)
 
-    # 4 Apprentissage supervisé car y est connu
-    model.fit(xtrain, ytrain)
+from sklearn.tree import export_graphviz
+export_graphviz(model.estimators_[0], out_file="data/heartdisease/tree.dot", feature_names=xoriginal.columns, class_names=["0", "1"])
 
-    # 5 Score
-    train_score = model.score(xtrain, ytrain)
-    test_score = model.score(xtest, ytest)
-    print("Score", k, train_score, test_score)
-
-
-
-
+print(model.feature_importances_)
+plt.bar(xoriginal.columns, model.feature_importances_)
+plt.xticks(rotation=45)
+plt.show()
