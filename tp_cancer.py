@@ -16,6 +16,7 @@ import sklearn.neighbors as nb
 import sklearn.model_selection as ms
 import sklearn.ensemble as rf
 import pickle
+import sklearn.svm as svm
 print(sklearn.__version__)
 
 # 1 Pandas DataMart
@@ -44,7 +45,8 @@ degree = 2
 # model = pipe.make_pipeline(pp.PolynomialFeatures(degree), lm.Ridge())
 # f(x) = ax² + bx + c
 # model = nb.KNeighborsClassifier(n_neighbors=3)
-model = rf.RandomForestClassifier(max_depth=4)
+# model = rf.RandomForestClassifier(max_depth=4)
+model = svm.SVC(kernel="linear")  # kernel = rbf, poly, linear, degree=3
 
 # 4 Apprentissage supervisé car y est connu
 model.fit(xtrain, ytrain)
@@ -65,5 +67,7 @@ plt.show()
 with open("data/breast-cancer/rf.pickle", "wb") as f:
     pickle.dump(model, f)
 
-
+# Sauvegarder le model
+# Faire une prédiction dans un nouveau script
+# demo mnist
 
