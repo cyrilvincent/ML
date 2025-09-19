@@ -18,6 +18,7 @@ import sklearn.ensemble as rf
 import sklearn.neural_network as nn
 import pickle
 import sklearn.svm as svm
+import sklearn.metrics as metrics
 print(sklearn.__version__)
 
 # 1 Pandas DataMart
@@ -59,6 +60,14 @@ model.fit(xtrain, ytrain)
 train_score = model.score(xtrain, ytrain)
 test_score = model.score(xtest, ytest)
 print("Score", train_score, test_score)
+
+ypred = model.predict(xtest)
+
+print(metrics.classification_report(ytest, ypred))
+plt.matshow(metrics.confusion_matrix(ytest, ypred))
+plt.show()
+
+
 #
 # from sklearn.tree import export_graphviz
 # export_graphviz(model.estimators_[0], out_file="data/breast-cancer/tree.dot", feature_names=xoriginal.columns, class_names=["0", "1"])
