@@ -9,7 +9,7 @@ import sklearn.model_selection as ms
 
 
 print(sklearn.__version__)
-# Set the seed
+#0 Set the seed
 np.random.seed(42)
 
 #1 Load data
