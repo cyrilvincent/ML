@@ -20,12 +20,13 @@ xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_si
 
 #5 Creating the model
 # model = lm.LinearRegression()
-model = n.KNeighborsClassifier(n_neighbors=3)
-# f(x) = ax + b => 2 poids
+for k in range(3,12,2):
+    model = n.KNeighborsClassifier(n_neighbors=k)
+    # f(x) = ax + b => 2 poids
 
-#6 Fit
-model.fit(xtrain, ytrain)
+    #6 Fit
+    model.fit(xtrain, ytrain)
 
-#7 Scoring (facultatif)
-score = model.score(xtest, ytest)
-print(f"Score: {score:.2f}")
+    #7 Scoring (facultatif)
+    score = model.score(xtest, ytest)
+    print(f"Score: {k} {score:.2f}")
