@@ -19,8 +19,12 @@ dataframe = pd.read_csv("data/house/house.csv")
 y = dataframe["loyer"]
 x = dataframe["surface"].values.reshape(-1, 1)
 
+
 #3 Train Test Split
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
+
+#4
+
 
 #5 Creating the model
 # model = lm.LinearRegression()
