@@ -8,6 +8,7 @@ import sklearn.model_selection as ms
 import sklearn.preprocessing as pp
 import sklearn.ensemble as rf
 import pickle
+import sklearn.svm as svm
 
 print(sklearn.__version__)
 np.random.seed(42)
@@ -40,10 +41,9 @@ xtest = scaler.transform(xtest)
 #     score = model.score(xtest, ytest)
 #     print(f"Score: {k} {score:.2f}")
 
-model = rf.RandomForestClassifier(max_depth=5)
+# model = rf.RandomForestClassifier(max_depth=5)
+model = svm.SVC(C=0.1, kernel='poly', degree=2)
 model.fit(xtrain, ytrain)
-
-
 
 test_score = model.score(xtest, ytest)
 train_score = model.score(xtrain, ytrain)

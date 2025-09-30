@@ -10,6 +10,7 @@ import sklearn.neighbors as n
 import sklearn.model_selection as ms
 import sklearn.preprocessing as pp
 import sklearn.ensemble as rf
+import pickle
 
 np.random.seed(42)
 
@@ -36,6 +37,8 @@ model.fit(xtrain, ytrain)
 test_score = model.score(xtest, ytest)
 train_score = model.score(xtrain, ytrain)
 print(train_score, test_score)
+with open(f"data/breast-cancer/rf-{int(test_score * 100)}.pickle", "wb") as f:
+    pickle.dump((scaler, model), f)
 
 from sklearn.tree import export_graphviz
 export_graphviz(model.estimators_[0], out_file="data/breast-cancer/tree.dot", feature_names=list(x.columns), class_names=["0", "1"])
