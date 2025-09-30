@@ -15,12 +15,15 @@ print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape)
 xtrain = xtrain.reshape(-1, 28*28) # 764
 xtest = xtest.reshape(-1, 28*28)
 
-model = nn.KNeighborsClassifier(n_neighbors=3)
+# model = nn.KNeighborsClassifier(n_neighbors=3)
+model = rf.RandomForestClassifier()
 model.fit(xtrain, ytrain)
 ypredicted = model.predict(xtest)
 score = model.score(xtest, ytest)
 print(f"Score: {score:.3f}")
-model.fit(xtrain, ytrain)
+
+plt.matshow(model.feature_importances_.reshape(28, 28))
+plt.show()
 
 xtest = xtest.reshape(-1, 28, 28)
 select = np.random.randint(xtest.shape[0], size=12)
