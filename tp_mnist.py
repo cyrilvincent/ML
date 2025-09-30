@@ -15,25 +15,12 @@ print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape)
 xtrain = xtrain.reshape(-1, 28*28) # 764
 xtest = xtest.reshape(-1, 28*28)
 
-# for k in range(3,12):
-#     model = nn.KNeighborsClassifier(n_neighbors=k)
-#     model.fit(xtrain, ytrain)
-#     ypredicted = model.predict(xtest)
-#     score = model.score(xtest, ytest)
-#     print(f"K={k} Score: {score:.3f}")
-# model = rf.RandomForestClassifier()
-# model = rf.GradientBoostingClassifier()
-model = neural.MLPClassifier(hidden_layer_sizes=(784,500,200,100))
+model = nn.KNeighborsClassifier(n_neighbors=3)
 model.fit(xtrain, ytrain)
 ypredicted = model.predict(xtest)
 score = model.score(xtest, ytest)
 print(f"Score: {score:.3f}")
-
-# export_graphviz(model.estimators_[0], out_file="data/mnist/tree.dot", class_names=["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
-#
-# matrix = model.feature_importances_.reshape(28, 28)
-# plt.matshow(matrix)
-# plt.show()
+model.fit(xtrain, ytrain)
 
 xtest = xtest.reshape(-1, 28, 28)
 select = np.random.randint(xtest.shape[0], size=12)
