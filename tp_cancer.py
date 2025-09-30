@@ -34,7 +34,7 @@ xtest = scaler.transform(xtest)
 # model = n.KNeighborsClassifier(n_neighbors=11)
 # f(x) = ax + b => 2 poids
 # model = rf.RandomForestClassifier(max_depth=5)
-model = nn.MLPClassifier(hidden_layer_sizes=(20, 10))
+model = nn.MLPClassifier(hidden_layer_sizes=(20,))
 model.fit(xtrain, ytrain)
 test_score = model.score(xtest, ytest)
 train_score = model.score(xtrain, ytrain)
