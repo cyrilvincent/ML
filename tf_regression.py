@@ -11,7 +11,7 @@ noise = 10
 def f(x):
     delta = (np.random.rand(x.shape[0]) - 0.5) * noise
     # f(x) = 2.5x.sin(0.7x)+2
-    return  2.5 * x * np.sin(0.7 * x) + 2 + delta
+    return 2.5 * x * np.sin(0.7 * x) + 2 + delta
 
 dataset_x = np.linspace(0, 10, 1000)
 dataset_y = f(dataset_x)
