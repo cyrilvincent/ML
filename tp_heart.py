@@ -9,6 +9,7 @@ import sklearn.preprocessing as pp
 import sklearn.ensemble as rf
 import pickle
 import sklearn.svm as svm
+import sklearn.neural_network as nn
 
 print(sklearn.__version__)
 np.random.seed(42)
@@ -42,7 +43,8 @@ xtest = scaler.transform(xtest)
 #     print(f"Score: {k} {score:.2f}")
 
 # model = rf.RandomForestClassifier(max_depth=5)
-model = svm.SVC(C=0.1, kernel='poly', degree=2)
+# model = svm.SVC(C=0.1, kernel='poly', degree=2)
+model = nn.MLPClassifier(hidden_layer_sizes=(30,20,10))
 model.fit(xtrain, ytrain)
 
 test_score = model.score(xtest, ytest)
