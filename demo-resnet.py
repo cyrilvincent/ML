@@ -9,7 +9,7 @@ from tensorflow.keras.applications.resnet_v2 import ResNet152V2
 model = ResNet152V2()
 
 # load an image from file
-image = load_img('data/img/familly.jpg', target_size=(224, 224))
+image = load_img('data/img/ski.jpg', target_size=(224, 224))
 # convert the image pixels to a numpy array
 image = img_to_array(image)
 # reshape data for the model : (nbsample, length, width, colordepth)
@@ -21,7 +21,8 @@ yhat = model.predict(image)
 # convert the probabilities to class labels
 label = decode_predictions(yhat)
 # retrieve the most likely result, e.g. highest probability
-label = label[0][0]
+labels = label[0][:5]
+print(labels)
 # print the classification
-print('%s (%.2f%%)' % (label[1], label[2]*100))
+# print('%s (%.2f%%)' % (label[1], label[2]*100))
 
