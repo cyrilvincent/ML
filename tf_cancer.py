@@ -23,18 +23,24 @@ xtest = scaler.transform(xtest)
 
 model = tf.keras.Sequential([
     tf.keras.layers.Dense(30, activation=tf.nn.relu, input_shape=(x.shape[1],)),
+    tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
+    tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Dense(30, activation=tf.nn.relu),
-    tf.keras.layers.Dense(1, activation=tf.nn.softmax)
+    tf.keras.layers.Dropout(0.5),
+    tf.keras.layers.Dense(1, activation="sigmoid")
   ])
 
-model.compile(loss="binary_crossentropy", optimizer="rmsprop", metrics=['accuracy'])
+model.compile(loss="mse", optimizer="rmsprop", metrics=['accuracy'])
 model.summary()
 
-hist = model.fit(xtrain, ytrain, epochs=50, batch_size=1, validation_split=0.2)
+hist = model.fit(xtrain, ytrain, epochs=50, batch_size=1)
 eval = model.evaluate(xtest, ytest)
 print(eval)
 ypredict = model.predict(xtest)
+
+model.save("data/breast-cancer/mlp.h5")
+
 
 
 import matplotlib.pyplot as plt

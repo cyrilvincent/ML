@@ -13,29 +13,36 @@ x_test = x_test.astype("float32")
 x_train /= 255
 x_test /= 255
 
-x_train = x_train.reshape(-1,28*28)
-x_test = x_test.reshape(-1,28*28)
+# x_train = x_train.reshape(-1,28*28)
+# x_test = x_test.reshape(-1,28*28)
 
 y_train = tf.keras.utils.to_categorical(y_train)
 y_test = tf.keras.utils.to_categorical(y_test)
 
-sample = np.random.randint(60000, size=5000)
-x_train = x_train[sample]
-y_train = y_train[sample]
-
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(600, input_shape=(x_train.shape[1],)),
+    # Bottleneck
+    # 28,28,1
+    tf.keras.layers.Conv2D(16, (3,3), input_shape=(28, 28, 1), padding="same"), # 28,28,16
+    tf.keras.layers.Activation("relu"),
+    tf.keras.layers.MaxPooling2D(pool_size=(2,2)), #14,14,16
+    tf.keras.layers.Conv2D(32, (3, 3), padding="same"), #14,14,32
+    tf.keras.layers.Activation("relu"),
+    tf.keras.layers.MaxPooling2D(pool_size=(2, 2)), #7,7,32
+    tf.keras.layers.Flatten(), #1568
+    tf.keras.layers.Dense(600, activation="relu"),
     tf.keras.layers.Dense(400, activation="relu"),
     tf.keras.layers.Dense(200, activation="relu"),
     tf.keras.layers.Dense(100, activation="relu"),
-    tf.keras.layers.Dense(10, activation=tf.nn.softmax),
+    tf.keras.layers.Dense(10, activation="softmax"),
   ])
-model.compile(loss="categorical_crossentropy", metrics=['accuracy'])
+model.compile(optimizer="rmsprop", loss="categorical_crossentropy", metrics=['accuracy'])
 trained = model.fit(x_train, y_train, epochs=5, batch_size=10,validation_data=(x_test, y_test))
 print(model.summary())
 
 predicted = model.predict(x_test)
 print(y_test[:10], predicted[:10], np.argmax(predicted[:10], axis=1))
+
+
 
 import matplotlib.pyplot as plt
 # Gestion des erreurs
