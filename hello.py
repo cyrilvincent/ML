@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 print("Hello")
 print(np.__version__)
@@ -12,9 +13,13 @@ print(np.sin(a1))
 
 dataframe = pd.read_csv("data/house/house.csv")
 dataframe["loyer_m2"] = dataframe["loyer"] / dataframe["surface"]
-dataframe = dataframe[dataframe["surface"] < 100]
+# dataframe = dataframe[dataframe["surface"] < 100]
 dataframe.to_html("house.html")
 dataframe.to_excel("house.xlsx")
+print(dataframe.describe())
+
+plt.scatter(dataframe["surface"], dataframe["loyer"])
+plt.show()
 
 # big = np.arange(1000)
 # filter = big % 2 == 0
