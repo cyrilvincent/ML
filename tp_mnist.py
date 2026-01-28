@@ -1,6 +1,8 @@
 import numpy as np
 import sklearn.neighbors as n
 import matplotlib.pyplot as plt
+import sklearn.ensemble as rf
+import pickle
 
 np.random.seed(42)
 
@@ -13,13 +15,24 @@ print(xtest.shape, ytrain.shape)
 xtrain = xtrain.reshape(-1, 28*28)
 xtest = xtest.reshape(-1, 28*28)
 
-model = n.KNeighborsClassifier(n_neighbors=3)
+# model = n.KNeighborsClassifier(n_neighbors=3)
+model = rf.RandomForestClassifier()
 model.fit(xtrain, ytrain)
 print(model.score(xtest, ytest))
 ypredicted = model.predict(xtest)
 
+with open("data/mnist/rf.pickle", "wb") as f:
+    pickle.dump(model, f)
+
+plt.imshow(model.feature_importances_.reshape(28,28))
+plt.show()
+
+
+
 xtest = xtest.reshape(-1, 28, 28)
 select = np.random.randint(xtest.shape[0], size=12)
+
+
 
 for index, value in enumerate(select):
     plt.subplot(3,4,index+1)
