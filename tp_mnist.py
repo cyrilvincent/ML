@@ -3,6 +3,7 @@ import sklearn.neighbors as n
 import matplotlib.pyplot as plt
 import sklearn.ensemble as rf
 import pickle
+import sklearn.svm as svm
 
 np.random.seed(42)
 
@@ -16,7 +17,8 @@ xtrain = xtrain.reshape(-1, 28*28)
 xtest = xtest.reshape(-1, 28*28)
 
 # model = n.KNeighborsClassifier(n_neighbors=3)
-model = rf.RandomForestClassifier()
+# model = rf.RandomForestClassifier()
+model = svm.SVC(C=1, kernel="poly", degree=3)
 model.fit(xtrain, ytrain)
 print(model.score(xtest, ytest))
 ypredicted = model.predict(xtest)
