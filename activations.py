@@ -3,7 +3,7 @@ import math
 constantFn = lambda x : 1
 identityFn = lambda x: x
 reluFn = lambda x: max(0, x)
-hardSigmoidFn = lambda x: min(max(0, x + 2), 4)
+hardSigmoidFn = lambda x: min(max(0, x + 0.5), 1)
 leluFn = lambda x, alpha: x * alpha if x < 0 else x
 tanhFn = lambda x: 0.5 + 0.5 * math.tanh(x / 2)
 sigmoidFn = lambda x: 1 / (1 + math.exp(x * -1))

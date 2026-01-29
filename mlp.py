@@ -48,7 +48,7 @@ class Perceptron:
             gradient = loss * (self.weigths[i] / totalWeigths)
             gradients.append(gradient)
             delta = gradient  * learningrate / self.dActivationFn(target)
-            self.weigths[i] -= delta
+            self.weigths[i] += delta
         return gradients
 
     def clone(self):

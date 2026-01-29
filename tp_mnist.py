@@ -29,12 +29,8 @@ with open("data/mnist/rf.pickle", "wb") as f:
 plt.imshow(model.feature_importances_.reshape(28,28))
 plt.show()
 
-
-
 xtest = xtest.reshape(-1, 28, 28)
 select = np.random.randint(xtest.shape[0], size=12)
-
-
 
 for index, value in enumerate(select):
     plt.subplot(3,4,index+1)
