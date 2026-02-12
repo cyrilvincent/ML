@@ -9,11 +9,11 @@ from tensorflow.keras.applications.resnet_v2 import ResNet152V2
 model = ResNet152V2()
 
 # load an image from file
-image = load_img('data/img/ski.jpg', target_size=(224, 224))
+image = load_img('data/img/mer.jpg', target_size=(224, 224))
 # convert the image pixels to a numpy array
 image = img_to_array(image)
 # reshape data for the model : (nbsample, length, width, colordepth)
-image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
+image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2])) # 1 * RGB
 # prepare the image for the VGG model
 image = preprocess_input(image)
 # predict the probability across all output classes
