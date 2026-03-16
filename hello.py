@@ -12,8 +12,6 @@ print(df.describe())
 y = df["loyer"]
 x = df["surface"].values.reshape(-1, 1)
 
-
-
 model = lm.LinearRegression()
 model.fit(x, y)
 
