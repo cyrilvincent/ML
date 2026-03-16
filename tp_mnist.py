@@ -44,7 +44,9 @@ errors = ytest != ypred
 xerrors = xtest[errors]
 yerrors = ytest[errors]
 
-for index, value in enumerate(errors):
+select = np.random.randint(xerrors.shape[0], size=12)
+
+for index, value in enumerate(select):
     plt.subplot(3,4, index + 1)
     plt.axis("off")
     plt.imshow(xerrors[value], cmap=plt.cm.gray_r)
