@@ -42,7 +42,7 @@ plt.show()
 
 errors = ytest != ypred
 xerrors = xtest[errors]
-yerrors = ytest[errors]
+yerrors = ypred[errors]
 
 select = np.random.randint(xerrors.shape[0], size=12)
 
