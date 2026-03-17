@@ -9,6 +9,7 @@ import sklearn.neighbors as n
 import numpy as np
 import sklearn.ensemble as rf
 import sklearn.tree as tree
+import sklearn.neural_network as nn
 
 df = pd.read_csv("data/heartdisease/data_cleaned_up.csv")
 print(df.describe())
@@ -24,15 +25,16 @@ print(xtest.shape)
 
 k=3
 # model = n.KNeighborsClassifier(n_neighbors=k)
-model = rf.RandomForestClassifier()
+# model = rf.RandomForestClassifier()
+model = nn.MLPClassifier(hidden_layer_sizes=(10,5), activation="relu")
 model.fit(xtrain, ytrain)
 print(f"Train score: {model.score(xtrain, ytrain):.2f}")
 print(f"Test score: {model.score(xtest, ytest):.2f}")
 
-tree.export_graphviz(model.estimators_[0], out_file="data/heartdisease/tree.dot", feature_names=xtrain.columns, class_names=["0","1"])
-
-print(model.feature_importances_)
-
-plt.bar(x.columns, model.feature_importances_)
-plt.show()
+# tree.export_graphviz(model.estimators_[0], out_file="data/heartdisease/tree.dot", feature_names=xtrain.columns, class_names=["0","1"])
+#
+# print(model.feature_importances_)
+#
+# plt.bar(x.columns, model.feature_importances_)
+# plt.show()
 
