@@ -7,6 +7,7 @@ import sklearn.preprocessing as pp
 import sklearn.model_selection as ms
 import sklearn.neighbors as n
 import numpy as np
+import sklearn.ensemble as rf
 
 data = np.load("data/mnist/mnist.npz")
 print(data)
@@ -24,10 +25,14 @@ xtrain = xtrain.reshape(-1, 28*28)
 xtest = xtest.reshape(-1, 28*28)
 print(xtest.shape)
 
-model = n.KNeighborsClassifier(n_neighbors=3)
+# model = n.KNeighborsClassifier(n_neighbors=3)
+# model.fit(xtrain, ytrain)
+# print(f"Train score for k=3: {model.score(xtrain, ytrain):.2f}")
+# print(f"Test score for k=3: {model.score(xtest, ytest):.2f}")
+model = rf.RandomForestClassifier()
 model.fit(xtrain, ytrain)
-print(f"Train score for k=3: {model.score(xtrain, ytrain):.2f}")
-print(f"Test score for k=3: {model.score(xtest, ytest):.2f}")
+print(f"Train score: {model.score(xtrain, ytrain):.2f}")
+print(f"Test score: {model.score(xtest, ytest):.2f}")
 
 ypred = model.predict(xtest)
 xtest = xtest.reshape(-1, 28, 28)
@@ -51,6 +56,9 @@ for index, value in enumerate(select):
     plt.axis("off")
     plt.imshow(xerrors[value], cmap=plt.cm.gray_r)
     plt.title(f"Predicted {yerrors[value]}")
+plt.show()
+
+plt.imshow(model.feature_importances_.reshape(28, 28))
 plt.show()
 
 
