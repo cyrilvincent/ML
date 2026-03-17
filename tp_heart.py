@@ -31,4 +31,8 @@ print(f"Test score: {model.score(xtest, ytest):.2f}")
 
 tree.export_graphviz(model.estimators_[0], out_file="data/heartdisease/tree.dot", feature_names=xtrain.columns, class_names=["0","1"])
 
+print(model.feature_importances_)
+
+plt.bar(x.columns, model.feature_importances_)
+plt.show()
 

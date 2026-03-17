@@ -26,5 +26,8 @@ for k in range(3, 15, 2):
     print(f"Train score for k={k}: {model.score(xtrain, ytrain):.2f}")
     print(f"Test score for k={k}: {model.score(xtest, ytest):.2f}")
 
-
-
+# Porter tp_cancer.py en RF
+# Afficher le 1er arbre + features importances
+# Ajouter une colonne Random x["rnd"] = np.random.rand() et refaire tourner le RF + Features importances
+# Bonus
+# MNIST faire un RF + Features importances => reshape(28, 28) => plt.matshow
