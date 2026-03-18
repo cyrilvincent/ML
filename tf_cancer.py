@@ -1,5 +1,5 @@
 import tensorflow as tf
-import tensorflow.keras as keras
+import keras
 import pandas as pd
 import numpy as np
 import sklearn.model_selection as ms
