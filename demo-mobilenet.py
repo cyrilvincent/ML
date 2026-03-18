@@ -1,15 +1,15 @@
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
-from keras.applications.vgg16 import preprocess_input
-from keras.applications.vgg16 import decode_predictions
-from keras.applications.vgg16 import VGG16
+from keras.applications.mobilenet_v2 import (preprocess_input)
+from keras.applications.mobilenet_v2 import decode_predictions
+from keras.applications.mobilenet_v2 import MobileNetV2
 
 
 # load the model
-model = VGG16()
-model.summary()
+model = MobileNetV2()
+
 # load an image from file
-image = load_img('data/img/jura.jpg', target_size=(224, 224))
+image = load_img('data/img/ski.jpg', target_size=(224, 224))
 # convert the image pixels to a numpy array
 image = img_to_array(image)
 # reshape data for the model : (nbsample, length, width, colordepth)
@@ -17,11 +17,12 @@ image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 # prepare the image for the VGG model
 image = preprocess_input(image)
 # predict the probability across all output classes
-predicted = model.predict(image)
-
+yhat = model.predict(image)
 # convert the probabilities to class labels
-label = decode_predictions(predicted)
+label = decode_predictions(yhat)
 # retrieve the most likely result, e.g. highest probability
-labels = label[0][:10]
+labels = label[0][:5]
+print(labels)
 # print the classification
-print(label[0])
+# print('%s (%.2f%%)' % (label[1], label[2]*100))
+
