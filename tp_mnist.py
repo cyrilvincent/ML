@@ -54,8 +54,6 @@ for index, value in enumerate(select):
     plt.title(f"Predicted {yerrors[value]}")
 plt.show()
 
-plt.imshow(model.feature_importances_.reshape(28, 28))
-plt.show()
 
 
 
