@@ -30,10 +30,6 @@ model.fit(xtrain, ytrain)
 print(f"Train score for k=3: {model.score(xtrain, ytrain):.2f}")
 print(f"Test score for k=3: {model.score(xtest, ytest):.2f}")
 
-model.fit(xtrain, ytrain)
-print(f"Train score: {model.score(xtrain, ytrain):.2f}")
-print(f"Test score: {model.score(xtest, ytest):.2f}")
-
 ypred = model.predict(xtest)
 xtest = xtest.reshape(-1, 28, 28)
 select = np.random.randint(xtest.shape[0], size=12)
