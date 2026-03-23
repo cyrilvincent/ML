@@ -13,7 +13,7 @@ model.add(keras.layers.Dropout(0.5))
 model.add(keras.layers.Dense(256))
 model.add(keras.layers.Activation('relu'))
 model.add(keras.layers.Dropout(0.5))
-model.add(keras.layers.Dense(1))
+model.add(keras.layers.Dense(10))
 model.add(keras.layers.Activation('sigmoid'))
 
 model.build()
