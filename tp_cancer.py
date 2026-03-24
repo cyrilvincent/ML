@@ -35,7 +35,7 @@ xtest = scaler.transform(xtest)
 # model = n.KNeighborsClassifier(n_neighbors=3)
 # model = rf.RandomForestClassifier(max_depth=5)
 # model = svm.SVC(C=0.1)
-rf.Gra
+
 model = neural.MLPClassifier(hidden_layer_sizes=(20,20))
 model.fit(xtrain, ytrain)
 

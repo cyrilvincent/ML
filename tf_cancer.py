@@ -35,17 +35,30 @@ scaler.fit(xtrain)
 xtrain = scaler.transform(xtrain)
 xtest = scaler.transform(xtest)
 
+ytrain = keras.utils.to_categorical(ytrain)
+ytest = keras.utils.to_categorical(ytest)
+
+# 7 => [0,0,0,0,0,0,0,1,0,0]
+# 1 => [0,1,0,0,0,0,0,0,0,0]
+
 model = keras.Sequential()
 model.add(keras.layers.Input((xtrain.shape[1],)))
 model.add(keras.layers.Dense(20, activation="relu"))
+model.add(keras.layers.Dropout(0.5))
 model.add(keras.layers.Dense(20, activation="relu"))
-model.add(keras.layers.Dense(1, activation="sigmoid"))
+model.add(keras.layers.Dropout(0.5))
+model.add(keras.layers.Dense(2, activation="softmax"))
+# model.add(keras.layers.Dense(2, activation="linear"))
 
-model.compile(optimizer="rmsprop", metrics=["accuracy"], loss="mse")
+#3 => [0.01, 0.02, 0.5, 0.1,, 0,0,0,0,0,0]
+
+model.compile(optimizer="rmsprop", metrics=["accuracy"], loss="categorical_crossentropy")
 
 # model.fit(xtrain, ytrain, validation_split=0.2)
 model.fit(xtrain, ytrain, validation_data=(xtest, ytest), epochs=10)
 
+model.save("data/breast-cancer/mlp.h5")
 ypred = model.predict(xtest)
+print(ypred > 0.5)
 
 print(model.evaluate(xtest, ytest))
