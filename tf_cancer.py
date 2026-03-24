@@ -11,6 +11,8 @@ import sklearn.ensemble as rf
 import sklearn.tree as tree
 import sklearn.svm as svm
 import sklearn.neural_network as neural
+import tensorflow as tf
+import keras
 import pickle
 
 df = pd.read_csv("data/breast-cancer/data.csv")
@@ -24,6 +26,7 @@ print(df.corr())
 columns = x.columns
 
 np.random.seed(42)
+tf.random.set_seed(42)
 
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
 
@@ -32,26 +35,17 @@ scaler.fit(xtrain)
 xtrain = scaler.transform(xtrain)
 xtest = scaler.transform(xtest)
 
-# model = n.KNeighborsClassifier(n_neighbors=3)
-# model = rf.RandomForestClassifier(max_depth=5)
-# model = svm.SVC(C=0.1)
-rf.Gra
-model = neural.MLPClassifier(hidden_layer_sizes=(20,20))
-model.fit(xtrain, ytrain)
+model = keras.Sequential()
+model.add(keras.layers.Input((xtrain.shape[1],)))
+model.add(keras.layers.Dense(20, activation="relu"))
+model.add(keras.layers.Dense(20, activation="relu"))
+model.add(keras.layers.Dense(1, activation="sigmoid"))
+
+model.compile(optimizer="rmsprop", metrics=["accuracy"], loss="mse")
+
+# model.fit(xtrain, ytrain, validation_split=0.2)
+model.fit(xtrain, ytrain, validation_data=(xtest, ytest), epochs=10)
 
 ypred = model.predict(xtest)
 
-trainscore = model.score(xtrain, ytrain)
-testscore = model.score(xtest, ytest)
-
-with open(f"data/breast-cancer/svc-{testscore:.3f}.pkl", "wb") as f:
-    pickle.dump([model, scaler], f)
-
-print(trainscore, testscore)
-
-tree.export_graphviz(model.estimators_[0], "data/breast-cancer/tree.dot",class_names=["0", "1"], feature_names= columns )
-print(model.feature_importances_)
-
-plt.bar(columns, model.feature_importances_)
-plt.xticks(rotation=45)
-plt.show()
+print(model.evaluate(xtest, ytest))
