@@ -5,6 +5,7 @@ import sklearn.linear_model as lm
 import sklearn.preprocessing as pp
 import sklearn.model_selection as ms
 import numpy as np
+import sklearn.neighbors as n
 
 data = np.load("data/mnist/mnist.npz")
 print(data)
@@ -22,11 +23,16 @@ xtrain = xtrain.reshape(-1, 28*28)
 xtest = xtest.reshape(-1, 28*28)
 print(xtest.shape)
 
-# model
-# fit
-
+model = n.KNeighborsClassifier(n_neighbors=3)
+model.fit(xtrain, ytrain)
 
 ypred = model.predict(xtest)
+
+train_score = model.score(xtrain, ytrain)
+test_score = model.score(xtest, ytest)
+
+print(train_score, test_score)
+
 xtest = xtest.reshape(-1, 28, 28)
 select = np.random.randint(xtest.shape[0], size=12)
 
