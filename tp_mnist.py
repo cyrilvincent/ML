@@ -56,5 +56,7 @@ for index, value in enumerate(select):
     plt.title(f"Predicted {yerrors[value]}")
 plt.show()
 
-
+# refaire tourner tp_cencer.py et analyser l'arbre et les features importances
+# Porter tp_mnist avec RandomForest
+# Afficher les Features importances features_importances_.reshape(28, 28) plt.imshow()
 
