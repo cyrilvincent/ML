@@ -23,6 +23,12 @@ np.random.seed(42)
 
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
 
+scaler = pp.RobustScaler()
+scaler.fit(xtrain)
+xtrain = scaler.transform(xtrain)
+xtest = scaler.transform(xtest)
+
+
 # Créer le modèle
 # model = lm.LinearRegression()
 model = pipe.make_pipeline(pp.PolynomialFeatures(2), lm.Ridge())
