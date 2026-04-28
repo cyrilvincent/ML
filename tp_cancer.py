@@ -9,6 +9,7 @@ import numpy as np
 import sklearn.model_selection as ms
 import sklearn.ensemble as rf
 import sklearn.tree as tree
+import pickle
 
 
 df = pd.read_csv("data/breast-cancer/data.csv")
@@ -39,6 +40,9 @@ model.fit(xtrain, ytrain)
 
 train_score = model.score(xtrain, ytrain)
 test_score = model.score(xtest, ytest)
+
+with open(f"data/breast-cancer/rf-{test_score:.2f}.pkl", "wb") as f:
+    pickle.dump((scaler, model), f)
 
 print(train_score, test_score)
 
