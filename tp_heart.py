@@ -5,6 +5,7 @@ import sklearn.preprocessing as pp
 import sklearn.pipeline as pipe
 import sklearn.model_selection as ms
 import numpy as np
+import sklearn.neighbors as n
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth', 500)
@@ -19,12 +20,20 @@ np.random.seed(42)
 
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
 
-model = pipe.make_pipeline(pp.PolynomialFeatures(2), lm.Ridge())
+scaler = pp.RobustScaler()
+scaler.fit(xtrain)
+xtrain = scaler.transform(xtrain)
+xtest = scaler.transform(xtest)
 
-model.fit(xtrain, ytrain)
+# model = pipe.make_pipeline(pp.PolynomialFeatures(2), lm.Ridge())
+for k in range(3, 12):
+    model = n.KNeighborsClassifier(n_neighbors=k)
 
-print(f"Train score: {model.score(xtrain, ytrain)}")
-print(f"Test score: {model.score(xtest, ytest)}")
+    model.fit(xtrain, ytrain)
+
+    print(k)
+    print(f"Train score: {model.score(xtrain, ytrain)}")
+    print(f"Test score: {model.score(xtest, ytest)}")
 
 values = np.array([[28,1,2,130,132,0,2,185,0,0]])
 predict = model.predict(values)
