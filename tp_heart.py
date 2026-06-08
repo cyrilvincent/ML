@@ -15,4 +15,17 @@ print(df.describe())
 y = df["num"]
 x = df.drop(["num"], axis=1)
 
-# TP Faites une regression poly 3
+np.random.seed(42)
+
+xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
+
+model = pipe.make_pipeline(pp.PolynomialFeatures(2), lm.Ridge())
+
+model.fit(xtrain, ytrain)
+
+print(f"Train score: {model.score(xtrain, ytrain)}")
+print(f"Test score: {model.score(xtest, ytest)}")
+
+values = np.array([[28,1,2,130,132,0,2,185,0,0]])
+predict = model.predict(values)
+print(predict)
