@@ -36,3 +36,9 @@ for index, value in enumerate(select):
     plt.title(f"Predicted {ypred[value]}")
 plt.show()
 
+# RF
+# Save
+# Faire un predict dans un autre fichier et afficher les 12 premiers xtest[:12]
+# Afficher les features_importances dans une heat map
+# feature.reshape(28,28) + imshow
+
