@@ -26,13 +26,16 @@ xtrain = scaler.transform(xtrain)
 xtest = scaler.transform(xtest)
 
 for k in range(3, 12):
-    model = n.KNeighborsClassifier(n_neighbors=k)
+    model = n.KNeighborsClassifier(n_neighbors=k, )
     model.fit(xtrain, ytrain)
 
     print(k)
-    print(f"Train score: {model.score(xtrain, ytrain)}")
-    print(f"Test score: {model.score(xtest, ytest)}")
+    print(f"Train score: {model.score(xtrain, ytrain):.1f}")
+    print(f"Test score: {model.score(xtest, ytest):.1f}")
 
 ypred = model.predict(xtest)
+print(ypred)
+
+# scaler.inverse_transform(xtrain)
 
 
