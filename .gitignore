@@ -7,3 +7,5 @@ cows/*
 *.h5
 tp_orthotaxy.py
 *ckpt*
+*.pkl
+*.pickle
