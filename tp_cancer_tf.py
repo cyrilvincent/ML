@@ -25,7 +25,7 @@ y = df["diagnosis"]
 x = df.drop(["diagnosis", "id"], axis=1)
 
 np.random.seed(42)
-tensorflow.random.set_seed(42)
+keras.utils.set_random_seed(42)
 
 xtrain, xtest, ytrain, ytest = ms.train_test_split(x, y, train_size=0.8, test_size=0.2)
 
@@ -34,17 +34,22 @@ scaler.fit(xtrain)
 xtrain = scaler.transform(xtrain)
 xtest = scaler.transform(xtest)
 
+ytrain = keras.utils.to_categorical(ytrain)
+ytest = keras.utils.to_categorical(ytest)
+
 model = keras.Sequential()
 model.add(keras.layers.Input((xtrain.shape[1],)))
 model.add(keras.layers.Dense(20, activation="relu"))
 model.add(keras.layers.Dense(10, activation="relu"))
-model.add(keras.layers.Dense(1, activation="sigmoid"))
+model.add(keras.layers.Dense(2, activation="softmax"))
 
-model.compile(optimizer="rmsprop", metrics=["accuracy"], loss="mse")
+model.compile(optimizer="rmsprop", metrics=["accuracy"], loss="categorical_crossentropy")
 
-model.fit(xtrain, ytrain, epochs=10, validation_split=0.2)  # validation_data=(xtest, ytest))
+model.fit(xtrain, ytrain, epochs=10, validation_split=0.2, batch_size=10)  # validation_data=(xtest, ytest))
 
 print(model.evaluate(xtest, ytest))
 
 ypred = model.predict(xtest)
-print(np.argmax(ypred))
+# print(np.argmax(ypred))
+
+model.save("data/breast-cancer/mlp.h5")
