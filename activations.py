@@ -1,6 +1,6 @@
 import math
 
-constantFn = lambda x : 1
+constantFn = lambda x: 1
 identityFn = lambda x: x
 reluFn = lambda x: max(0, x)
 hardSigmoidFn = lambda x: min(max(0, x + 2), 4)
