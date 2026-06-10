@@ -20,16 +20,27 @@ ytest = data["y_test"]
 
 print(xtrain.shape)
 
-xtrain = xtrain.reshape(-1, 28*28)
-xtest = xtest.reshape(-1, 28*28)
+xtrain = xtrain.astype(np.float32)
+xtest = xtest.astype(np.float32)
+xtrain /= 255
+xtest /= 255
 
 ytrain = keras.utils.to_categorical(ytrain)
 ytest = keras.utils.to_categorical(ytest)
 
 model = keras.Sequential()
-model.add(keras.layers.Input((xtrain.shape[1],)))
-model.add(keras.layers.Dense(500, activation="relu"))
-model.add(keras.layers.Dropout(0.1))
+model.add(keras.layers.Input((28, 28, 1)))
+# CNN = Bottleneck
+model.add(keras.layers.Conv2D(4, (3, 3), padding="same")) # 28,28,4
+model.add(keras.layers.ReLU())
+model.add(keras.layers.MaxPooling2D((2,2))) # 14,14,4
+
+model.add(keras.layers.Conv2D(8, (3, 3), padding="same")) # 14,14,8
+model.add(keras.layers.ReLU())
+model.add(keras.layers.MaxPooling2D((2,2))) # 7,7,8
+
+model.add(keras.layers.Flatten())  # 7 * 7 * 8 = 392
+
 model.add(keras.layers.Dense(200, activation="relu"))
 model.add(keras.layers.Dropout(0.1))
 model.add(keras.layers.Dense(100, activation="relu"))
@@ -40,7 +51,7 @@ model.summary()
 
 model.compile(optimizer="rmsprop", metrics=["accuracy"], loss="categorical_crossentropy")
 
-model.fit(xtrain, ytrain, epochs=1, validation_data=(xtest, ytest), batch_size=10)
+model.fit(xtrain, ytrain, epochs=10, validation_data=(xtest, ytest), batch_size=10)
 
 print(model.evaluate(xtest, ytest))
 
