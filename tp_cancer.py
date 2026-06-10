@@ -11,6 +11,7 @@ import sklearn.tree as tree
 import pickle
 import emlearn
 import sklearn.svm as svm
+import sklearn.neural_network as nn
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth', 500)
@@ -39,7 +40,8 @@ xtest = scaler.transform(xtest)
 #     print(f"Test score: {model.score(xtest, ytest):.1f}")
 
 # model = rf.RandomForestClassifier(n_estimators=100, max_depth=5)
-model = svm.SVC(C=1.0, kernel="linear")
+# model = svm.SVC(C=1.0, kernel="linear")
+model = nn.MLPClassifier(hidden_layer_sizes=(30,20,10))
 model.fit(xtrain, ytrain)
 
 # print(model.feature_importances_)
@@ -60,8 +62,8 @@ print(ypred)
 with open(f"data/breast-cancer/svm-{model.score(xtest, ytest):.2f}.pkl", "wb") as f:
     pickle.dump([scaler, model], f)
 
-cmodel = emlearn.convert(model, method='inline')
-cmodel.save(file="data/breast-cancer/rf.h", name='rf')
+# cmodel = emlearn.convert(model, method='inline')
+# cmodel.save(file="data/breast-cancer/rf.h", name='rf')
 
 
 
