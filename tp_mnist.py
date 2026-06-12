@@ -9,6 +9,7 @@ import sklearn.neighbors as n
 import sklearn.ensemble as rf
 import sklearn.tree as tree
 import pickle
+import sklearn.ensemble as rf
 
 data = np.load("data/mnist/mnist.npz")
 xtrain = data["x_train"]
@@ -21,7 +22,8 @@ print(xtrain.shape)
 xtrain = xtrain.reshape(-1, 28*28)
 xtest = xtest.reshape(-1, 28*28)
 
-model = n.KNeighborsClassifier(n_neighbors=3)
+# model = n.KNeighborsClassifier(n_neighbors=3)
+model = rf.RandomForestClassifier()
 model.fit(xtrain, ytrain)
 
 print(f"Train score: {model.score(xtrain, ytrain)}")
@@ -37,4 +39,7 @@ for index, value in enumerate(select):
     plt.axis("off")
     plt.imshow(xtest[value], cmap=plt.cm.gray_r)
     plt.title(f"Predicted {ypred[value]}")
+plt.show()
+
+plt.imshow(model.feature_importances_.reshape(28,28))
 plt.show()
