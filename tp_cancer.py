@@ -22,7 +22,6 @@ xtest = scaler.transform(xtest)
 for k in range(3, 12):
     model = n.KNeighborsClassifier(n_neighbors=k)
     model.fit(xtrain, ytrain)
-
     print("Training Score", model.score(xtrain, ytrain))
     print("Testing Score", model.score(xtest, ytest))
 
