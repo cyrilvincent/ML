@@ -9,7 +9,6 @@ import sklearn.neighbors as n
 import sklearn.ensemble as rf
 import sklearn.tree as tree
 import pickle
-import emlearn
 import sklearn.svm as svm
 import sklearn.neural_network as nn
 import tensorflow
@@ -34,15 +33,14 @@ model = keras.Sequential()
 model.add(keras.layers.Input((xtrain.shape[1],)))
 model.add(keras.layers.Dense(20, activation="relu"))
 model.add(keras.layers.Dense(10, activation="relu"))
-model.add(keras.layers.Dense(2, activation="softmax"))
+model.add(keras.layers.Dense(1, activation="sigmoid"))
 
 model.compile(optimizer="rmsprop", metrics=["accuracy"], loss="mse")
 
-model.fit(xtrain, ytrain, epochs=10, validation_split=0.2)  # validation_data=(xtest, ytest))
+model.fit(xtrain, ytrain, epochs=10, validation_split=0.2)
 
 print(model.evaluate(xtest, ytest))
 
 ypred = model.predict(xtest)
-print(np.argmax(ypred))
 
 model.save("data/breast-cancer/mlp.h5")
