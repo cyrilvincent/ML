@@ -1,6 +1,6 @@
-import tensorflow.keras as keras
+import keras
 
-model = keras.applications.vgg16(include_top=False, weights="imagenet", input_shape=(224, 224, 3))
+model = keras.applications.vgg16.VGG16(include_top=False, weights="imagenet", input_shape=(224, 224, 3))
 newModel = keras.models.Sequential()
 for l in model.layers:
     newModel.add(l)
@@ -16,8 +16,9 @@ model.add(keras.layers.Dropout(0.5))
 model.add(keras.layers.Dense(10))
 model.add(keras.layers.Activation('softmax'))
 
-model.build()
-model.optimizer = keras.optimizers.SGD(nesterov=True, lr=1e-5)
-print(model.summary())
+# model.build()
+# model.optimizer = keras.optimizers.SGD(nesterov=True, lr=1e-5)
+model.compile(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="rmsprop")
+model.summary()
 
 
