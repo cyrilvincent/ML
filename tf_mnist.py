@@ -37,40 +37,43 @@ model.add(keras.layers.Input((28,28,1)))
 model.add(keras.layers.ZeroPadding2D((1,1)))
 model.add(keras.layers.Convolution2D(8, (3, 3), activation='relu'))
 model.add(keras.layers.ReLU())
-model.add(keras.layers.MaxPooling2D((2,2), strides=(2,2)))
+model.add(keras.layers.MaxPooling2D((2,2), strides=(2,2))) # 14, 14, 8
 
 model.add(keras.layers.ZeroPadding2D((1,1)))
 model.add(keras.layers.Convolution2D(16, (3, 3), activation='relu'))
 model.add(keras.layers.ReLU())
-model.add(keras.layers.MaxPooling2D((2,2), strides=(2,2)))
+model.add(keras.layers.MaxPooling2D((2,2), strides=(2,2))) # 7, 7, 16
 
 model.add(keras.layers.ZeroPadding2D((1,1)))
 model.add(keras.layers.Convolution2D(16, (3, 3), activation='relu'))
 model.add(keras.layers.ReLU())
-model.add(keras.layers.MaxPooling2D((2,2), strides=(2,2)))
-model.add(keras.layers.GlobalAveragePooling2D())
+model.add(keras.layers.MaxPooling2D((2,2), strides=(2,2))) # 4,4,16
+
+# model.add(keras.layers.GlobalAveragePooling2D())
+model.add(keras.layers.Flatten())
+
 # model.add(keras.layers.Dense(600, activation="relu"))
 # model.add(keras.layers.Dropout(0.5))
 # model.add(keras.layers.Dense(400, activation="relu"))
 # model.add(keras.layers.Dropout(0.5))
-# model.add(keras.layers.Dense(200, activation="relu"))
-# model.add(keras.layers.Dropout(0.5))
-# model.add(keras.layers.Dense(100, activation="relu"))
-# model.add(keras.layers.Dropout(0.5))
+model.add(keras.layers.Dense(200, activation="relu"))
+model.add(keras.layers.Dropout(0.1))
+model.add(keras.layers.Dense(100, activation="relu"))
+model.add(keras.layers.Dropout(0.1))
 model.add(keras.layers.Dense(10, activation="softmax"))
 
 model.summary()
 
 model.compile(optimizer="rmsprop", metrics=["accuracy"], loss="categorical_crossentropy")
-checkpointer = keras.callbacks.ModelCheckpoint(filepath = 'data/mnist/vgg16-ckpt-{epoch:03d}-{accuracy:.3f}.h5',
+checkpointer = keras.callbacks.ModelCheckpoint(filepath='data/mnist/vgg16-ckpt-{epoch:03d}-{accuracy:.3f}.h5',
                                                          monitor='accuracy'
-                                                        )
-model.fit(xtrain, ytrain, epochs=100, batch_size=10, validation_split=0.2, callbacks=[checkpointer])
+                                              )
+model.fit(xtrain, ytrain, epochs=20, batch_size=100, validation_split=0.2, callbacks=[checkpointer])
 print(model.evaluate(xtest, ytest))
 model.save("data/mnist/mlp.keras")
 # contact@cyrilvincent.com
 
-ypred = np.argmax(model.predict(xtest))
+ypred = np.argmax(model.predict(xtest), axis=1)
 
 
 xtest = xtest.reshape(-1, 28, 28)
@@ -83,6 +86,7 @@ for index, value in enumerate(select):
     plt.title(f"Predicted {ypred[value]}")
 plt.show()
 
+ytest = data["y_test"]
 errors = ytest != ypred
 xerrors = xtest[errors]
 yerrors = ypred[errors]
